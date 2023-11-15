@@ -1,6 +1,15 @@
 # detectorjs
 
-> a template for typescript project or plugin
+## Installation
 
-- branch `master` => single repo template
-- branch `monorepo` => monorepo template
+```bash
+pnpm add detectorjs
+```
+
+## Usage
+
+```ts
+import { detect } from 'detectorjs'
+
+const detected = detect()
+```

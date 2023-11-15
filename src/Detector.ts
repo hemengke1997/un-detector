@@ -3,7 +3,7 @@ import { MobilePrefixRegExp, MobileRegExp } from './device'
 import { type IsSomeOs, Os, OsVersions, PopularOsTypes } from './os'
 
 export type BrowserDetected = {
-  name?: string
+  platform?: string
   version?: string
   versionNumber?: number
   isMobile?: boolean
@@ -44,7 +44,7 @@ export class Detector {
 
       return {
         ...this.defaultOs,
-        name: this.process.release.name,
+        platform: this.process.release.name,
         version: version.join('.'),
         versionNumber: Number.parseFloat(`${version[0]}.${versionTail}`),
         isMobile: false,
@@ -71,13 +71,15 @@ export class Detector {
       .filter((definition) => (<RegExp>definition[1]).test(this.userAgent))
       .map((definition) => {
         const match = (<RegExp>definition[1]).exec(this.userAgent)
-        const version = match && match[1].split(/[._]/).slice(0, 3)
-        const versionTails = Array.prototype.slice.call(version, 1).join('') || '0'
+        const version: Array<string | string[]> = (match && match[1].split(/[._]/).slice(0, 3)) || []
+        const versionTails = version?.slice(1).join('') || '0'
 
-        if (version && version.length < 3) Array.prototype.push.apply(version, version.length === 1 ? [0, 0] : [0])
+        if (version && version.length < 3) {
+          version.push(version.length === 1 ? ['0', '0'] : ['0'])
+        }
 
         return {
-          name: String(definition[0]),
+          platform: String(definition[0]),
           version: version?.join('.'),
           versionNumber: Number(`${version?.[0]}.${versionTails}`),
         }

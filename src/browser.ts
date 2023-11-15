@@ -5,6 +5,7 @@ export const browsers: BrowserDefinition[] = [
   ['opera', /Opera\/([0-9\.]+)(?:\s|$)/],
   ['opera', /OPR\/([0-9\.]+)(:?\s|$)$/],
   ['edge', /Edge\/([0-9\._]+)/],
+  ['edge', /Edg\/([0-9\._]+)/],
   ['ie', /Trident\/7\.0.*rv\:([0-9\.]+)\).*Gecko$/],
   ['ie', /MSIE\s([0-9\.]+);.*Trident\/[4-7].0/],
   ['ie', /MSIE\s(7\.0)/],
