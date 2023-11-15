@@ -73,7 +73,7 @@ importers:
 
   playground/spa:
     dependencies:
-      detectorjs:
+      all-detector:
         specifier: workspace:*
         version: link:../..
       react:
