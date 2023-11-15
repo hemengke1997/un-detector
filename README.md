@@ -1,4 +1,4 @@
-# ts-template
+# detectorjs
 
 > a template for typescript project or plugin
 

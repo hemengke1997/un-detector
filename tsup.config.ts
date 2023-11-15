@@ -2,11 +2,11 @@ import { defineConfig } from 'tsup'
 
 export const tsup = defineConfig((option) => ({
   entry: ['src/index.ts'],
-  target: 'node16',
+  target: 'es2015',
   dts: true,
   clean: true,
   format: ['cjs', 'esm'],
-  platform: 'node',
+  platform: 'neutral',
   splitting: false,
   treeshake: true,
   minify: false,

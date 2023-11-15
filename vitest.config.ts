@@ -2,7 +2,8 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    exclude: ['**/node_modules/**', '**/dist/**', './playground/**/*.*', './playground-temp/**/*.*'],
+    environment: 'jsdom',
+    exclude: ['**/node_modules/**', '**/dist/**'],
     testTimeout: 20000,
   },
 })
