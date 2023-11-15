@@ -4,7 +4,7 @@ export const tsup = defineConfig((option) => ({
   entry: ['src/index.ts'],
   target: 'es2015',
   dts: true,
-  clean: true,
+  clean: !option.watch,
   format: ['cjs', 'esm'],
   platform: 'neutral',
   splitting: false,

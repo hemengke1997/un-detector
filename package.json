@@ -1,5 +1,5 @@
 {
-  "name": "detectorjs",
+  "name": "all-detector",
   "version": "0.0.1",
   "packageManager": "pnpm@8.10.5",
   "description": "A simple and zero-dependency browser and node env detector.",
@@ -14,7 +14,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hemengke1997/detectorjs.git"
+    "url": "git+https://github.com/hemengke1997/all-detector.git"
   },
   "author": "hemengke <https://github.com/hemengke1997>",
   "files": [

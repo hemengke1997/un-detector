@@ -1,4 +1,4 @@
-import { detect } from 'detectorjs'
+import { detect } from 'all-detector'
 import { useState } from 'react'
 import './App.css'
 

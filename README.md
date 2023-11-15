@@ -1,15 +1,15 @@
-# detectorjs
+# all-detector
 
-## Installation
+## Install
 
 ```bash
-pnpm add detectorjs
+pnpm add all-detector
 ```
 
 ## Usage
 
 ```ts
-import { detect } from 'detectorjs'
+import { detect } from 'all-detector'
 
 const detected = detect()
 ```

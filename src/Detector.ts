@@ -1,15 +1,16 @@
 import { browsers } from './browser'
 import { MobilePrefixRegExp, MobileRegExp } from './device'
-import { type IsSomeOs, Os, OsVersions, PopularOsTypes } from './os'
+import { type IsSomeOs, type OperatingSystem, type PopularOsType, os, popularOsTypes } from './os'
 
 export type BrowserDetected = {
   platform?: string
+  os?: string
   version?: string
   versionNumber?: number
   isMobile?: boolean
-  os?: string
+  isLinux?: boolean
 } & {
-  [key in IsSomeOs]: boolean
+  [key in IsSomeOs]?: boolean
 }
 
 export class Detector {
@@ -51,6 +52,7 @@ export class Detector {
         os: this.process.platform,
         isWindows: /^win/i.test(this.process.platform),
         isMac: /^darwin/i.test(this.process.platform),
+        isLinux: /^linux/i.test(this.process.platform),
       }
     }
     if (!this.userAgent) {
@@ -68,9 +70,9 @@ export class Detector {
 
   private detectBrowser() {
     return browsers
-      .filter((definition) => (<RegExp>definition[1]).test(this.userAgent))
+      .filter((definition) => definition[1].test(this.userAgent))
       .map((definition) => {
-        const match = (<RegExp>definition[1]).exec(this.userAgent)
+        const match = definition[1].exec(this.userAgent)
         const version: Array<string | string[]> = (match && match[1].split(/[._]/).slice(0, 3)) || []
         const versionTails = version?.slice(1).join('') || '0'
 
@@ -79,7 +81,7 @@ export class Detector {
         }
 
         return {
-          platform: String(definition[0]),
+          platform: definition[0],
           version: version?.join('.'),
           versionNumber: Number(`${version?.[0]}.${versionTails}`),
         }
@@ -88,48 +90,42 @@ export class Detector {
   }
 
   private detectOS() {
-    return Os.map((os) => {
-      return {
-        pattern: os,
-        value: RegExp(`\\b${os.replace(/([ -])(?!$)/g, '$1?')}(?:x?[\\d._]+|[ \\w.]*)`, 'i').exec(this.userAgent),
-      }
-    })
-      .filter((os) => os.value)
-      .map((os) => {
-        let value = os.value?.[0] || ''
-        let osSuffix: string
+    for (let i = 0; i < os.length; i++) {
+      const [_os, regex] = os[i]
+      const match = regex.exec(this.userAgent)
+      let value: string = _os
 
-        if (os.pattern && /^Win/i.test(value) && !/^Windows Phone /i.test(value)) {
-          osSuffix = OsVersions[value.replace(/[^\d.]/g, '')]
-          value = `Windows ${osSuffix}`
+      const detected: BrowserDetected = {}
+      if (match) {
+        const osType = this.findOsType(_os)
+
+        switch (_os) {
+          case 'Mac OS':
+            value = match.input.match(/Mac OS X ([0-9_]+)/i)?.[0].replace(/_/g, '.') || ''
+            break
+          case 'Android OS':
+            value = match.input.match(/Android ([0-9.]+)/i)?.[0] || ''
+            break
+          case 'iOS':
+            value = match.input.match(/\w+\sOS ([0-9_]+)/i)?.[0].replace(/_/g, '.') || ''
+            break
+          case 'Linux':
+            detected.isLinux = true
+            break
+          default:
+            break
         }
 
-        value = value
-          .replace(/ ce$/i, ' CE')
-          .replace(/\bhpw/i, 'web')
-          .replace(/\bMacintosh\b/, 'Mac OS')
-          .replace(/_PowerPC\b/i, ' OS')
-          .replace(/\b(OS X) [^ \d]+/i, '$1')
-          .replace(/\bMac (OS X)\b/, '$1')
-          .replace(/\/(\d)/, ' $1')
-          .replace(/_/g, '.')
-          .replace(/(?: BePC|[ .]*fc[ \d.]+)$/i, '')
-          .replace(/\bx86\.64\b/gi, 'x86_64')
-          .replace(/\b(Windows Phone) OS\b/, '$1')
-          .replace(/\b(Chrome OS \w+) [\d.]+\b/, '$1')
-          .split(' on ')[0]
-          .trim()
-
-        value = /^(?:webOS|i(?:OS|P))/.test(value) ? value : value.charAt(0).toUpperCase() + value.slice(1)
-
-        const osType = this.findOsType(os.pattern)
+        detected.os = value
 
         if (osType) {
-          return { os: value, [osType]: true }
+          detected[osType] = true
         }
-        return { os: value }
-      })
-      .shift()
+
+        return detected
+      }
+    }
+    return null
   }
 
   private detectMobile() {
@@ -138,10 +134,10 @@ export class Detector {
     return { isMobile: mobile }
   }
 
-  private findOsType(os: string) {
-    for (const [k, v] of Object.entries(PopularOsTypes)) {
+  private findOsType(os: OperatingSystem): IsSomeOs | undefined {
+    for (const [k, v] of Object.entries(popularOsTypes)) {
       if (v.includes(os)) {
-        return `is${k}`
+        return `is${k as PopularOsType}`
       }
     }
   }
