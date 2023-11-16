@@ -1,3 +1,5 @@
+import { type PrefixWithIs } from './type'
+
 export const MobileRegExp = new RegExp(
   [
     '(android|bb\\d+|meego).+mobile|avantgo|bada\\/|blackberry|blazer|',
@@ -34,3 +36,9 @@ export const MobilePrefixRegExp = new RegExp(
   ].join(''),
   'i',
 )
+
+type Device = 'mobile'
+export type IsSomeDevice = PrefixWithIs<Device>
+export const popularDevices: Record<IsSomeDevice, Device[]> = {
+  isMobile: ['mobile'],
+}

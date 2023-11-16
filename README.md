@@ -29,3 +29,27 @@ detected = {
   versionNumber: 118.02088,
 };
 ```
+
+## For better experience
+
+
+### os
+```ts
+import { os } from 'un-detector'
+
+console.log(os.isMac())
+```
+
+### device
+```ts
+import { device } from 'un-detector'
+
+console.log(device.isMobile())
+```
+
+### browser
+```ts
+import { browser } from 'un-detector'
+
+console.log(browser.isEdge())
+```

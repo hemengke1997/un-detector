@@ -1,6 +1,6 @@
 import { cloneDeep } from '@minko-fe/lodash-pro'
 import { describe, expect, test } from 'vitest'
-import { detect } from '../src'
+import { browser, detect, device, os } from '../src'
 import { Detector } from '../src/Detector'
 
 describe('test method: detect()', () => {
@@ -14,6 +14,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('62.0.3202')
     expect(result.versionNumber).to.equal(62.03202)
     expect(result.isWindows).to.true
+    expect(os.isWindows(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isChrome(userAgent)).to.true
   })
 
   test('detect  Edge on Windows 10', () => {
@@ -26,6 +29,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('13.10586.0')
     expect(result.versionNumber).to.equal(13.10586)
     expect(result.isWindows).to.true
+    expect(os.isWindows(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isEdge(userAgent)).to.true
   })
 
   test('detect  Edge on Windows 8.1', () => {
@@ -38,6 +44,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('12.0.0')
     expect(result.versionNumber).to.equal(12)
     expect(result.isWindows).to.true
+    expect(os.isWindows(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isEdge(userAgent)).to.true
   })
 
   test('detect  Internet Explorer 11.0 on Windows 10', () => {
@@ -50,6 +59,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('11.0.0')
     expect(result.versionNumber).to.equal(11)
     expect(result.isWindows).to.true
+    expect(os.isWindows(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isIE(userAgent)).to.true
   })
 
   test('detect  Internet Explorer 10.6.0 on Windows 7', () => {
@@ -62,6 +74,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('10.6.0')
     expect(result.versionNumber).to.equal(10.6)
     expect(result.isWindows).to.true
+    expect(os.isWindows(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isIE(userAgent)).to.true
   })
 
   test('detect  Firefox on Windows 10', () => {
@@ -74,6 +89,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('56.0.0')
     expect(result.versionNumber).to.equal(56)
     expect(result.isWindows).to.true
+    expect(os.isWindows(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isFirefox(userAgent)).to.true
   })
 
   test('detect  Opera on Windows 10', () => {
@@ -87,6 +105,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('49.0.2725')
     expect(result.versionNumber).to.equal(49.02725)
     expect(result.isWindows).to.true
+    expect(os.isWindows(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isOpera(userAgent)).to.true
   })
 
   test('detect  Whale on Windows 10', () => {
@@ -100,6 +121,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('60.0.3112')
     expect(result.versionNumber).to.equal(60.03112)
     expect(result.isWindows).to.true
+    expect(os.isWindows(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isChrome(userAgent)).to.true
   })
 
   test('should return valie result with agent  Edge on Windows 10', () => {
@@ -112,6 +136,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('119.0.0')
     expect(result.versionNumber).to.equal(119)
     expect(result.isWindows).to.true
+    expect(os.isWindows(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isEdge(userAgent)).to.true
   })
 
   test('detect  Chrome on Windows7', () => {
@@ -125,6 +152,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('41.0.2228')
     expect(result.versionNumber).to.equal(41.02228)
     expect(result.isWindows).to.true
+    expect(os.isWindows(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isChrome(userAgent)).to.true
   })
 
   test('detect  Chrome on MacOS', () => {
@@ -138,6 +168,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('63.0.3205')
     expect(result.versionNumber).to.equal(63.03205)
     expect(result.isMac).to.true
+    expect(os.isMac(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isChrome(userAgent)).to.true
   })
 
   test('detect  Edge on MacOS', () => {
@@ -151,6 +184,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('118.0.2088')
     expect(result.versionNumber).to.equal(118.02088)
     expect(result.isMac).to.true
+    expect(os.isMac(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isEdge(userAgent)).to.true
   })
 
   test('detect  Safari on MacOS', () => {
@@ -164,6 +200,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('17.1.0')
     expect(result.versionNumber).to.equal(17.1)
     expect(result.isMac).to.true
+    expect(os.isMac(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isSafari(userAgent)).to.true
   })
 
   test('detect  Safari on iPhone 6 (Mobile)', () => {
@@ -177,32 +216,39 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('9.0.0')
     expect(result.versionNumber).to.equal(9)
     expect(result.isIOS).to.true
+    expect(os.isIOS(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isSafari(userAgent)).to.true
   })
 
   test('detect  crios on iPhone (Mobile)', () => {
     const userAgent =
       'Mozilla/5.0 (iPhone; U; CPU iPhone OS 5_1_1 like Mac OS X; en) AppleWebKit/534.46.0 (KHTML, like Gecko) CriOS/19.0.1084.60 Mobile/9B206 Safari/7534.48.3'
     const result = detect(userAgent)
-
     expect(result.isMobile).to.true
     expect(result.platform).to.equal('crios')
     expect(result.os).to.equal('iPhone OS 5.1.1')
     expect(result.version).to.equal('19.0.1084')
     expect(result.versionNumber).to.equal(19.01084)
     expect(result.isIOS).to.true
+    expect(os.isIOS(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isChrome(userAgent)).to.true
   })
 
   test('detect  Chrome on Galaxy S5 (Mobile)', () => {
     const userAgent =
       '5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36'
     const result = detect(userAgent)
-
     expect(result.isMobile).to.true
     expect(result.platform).to.equal('chrome')
     expect(result.os).to.equal('Android 5.0')
     expect(result.version).to.equal('62.0.3202')
     expect(result.versionNumber).to.equal(62.03202)
     expect(result.isAndroid).to.true
+    expect(os.isAndroid(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isChrome(userAgent)).to.true
   })
 
   test('detect  Chrome on Linux', () => {
@@ -215,6 +261,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('50.0.2661')
     expect(result.versionNumber).to.equal(50.02661)
     expect(result.isLinux).to.true
+    expect(os.isLinux(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isChrome(userAgent)).to.true
   })
 
   test('detect  Firefox on Linux', () => {
@@ -226,6 +275,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('46.0.0')
     expect(result.versionNumber).to.equal(46)
     expect(result.isLinux).to.true
+    expect(os.isLinux(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isFirefox(userAgent)).to.true
   })
 
   test('detect  Firefix on Windows', () => {
@@ -237,6 +289,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('40.1.0')
     expect(result.versionNumber).to.equal(40.1)
     expect(result.isWindows).to.true
+    expect(os.isWindows(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+    expect(browser.isFirefox(userAgent)).to.true
   })
 
   test('detect  Firefox on iOS', () => {
@@ -249,6 +304,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('3.2.0')
     expect(result.versionNumber).to.equal(3.2)
     expect(result.isIOS).to.true
+    expect(os.isIOS(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isFirefox(userAgent)).to.true
   })
 
   test('detect  Webkit on Android', () => {
@@ -261,6 +319,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('4.0.0')
     expect(result.versionNumber).to.equal(4)
     expect(result.isAndroid).to.true
+    expect(os.isAndroid(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isSafari(userAgent)).to.true
   })
 
   test('detect  iOS WebView on iOS', () => {
@@ -273,6 +334,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('533.17.9')
     expect(result.versionNumber).to.equal(533.179)
     expect(result.isIOS).to.true
+    expect(os.isIOS(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isSafari(userAgent)).to.true
   })
 
   test('detect  edge on iOS', () => {
@@ -285,6 +349,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('44.2.1')
     expect(result.versionNumber).to.equal(44.21)
     expect(result.isIOS).to.true
+    expect(os.isIOS(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isEdge(userAgent)).to.true
   })
 
   test('detect  Chromium-based WebView On Android', () => {
@@ -297,6 +364,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('43.0.2357')
     expect(result.versionNumber).to.equal(43.02357)
     expect(result.isAndroid).to.true
+    expect(os.isAndroid(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isChrome(userAgent)).to.true
   })
 
   test('detect  bot', () => {
@@ -309,6 +379,9 @@ describe('test method: detect()', () => {
     expect(result.version).to.equal('41.0.2272')
     expect(result.versionNumber).to.equal(41.02272)
     expect(result.isAndroid).to.true
+    expect(os.isAndroid(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isChrome(userAgent)).to.true
   })
 })
 

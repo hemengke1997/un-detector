@@ -1,3 +1,5 @@
+import { type PrefixWithIs } from './type'
+
 export type Browser =
   | 'aol'
   | 'edge'
@@ -29,6 +31,25 @@ export type Browser =
   | 'ios-webview'
   | 'curl'
 
+type PolularBrowserType = 'edge' | 'chrome' | 'safari' | 'firefox' | 'opera' | 'IE'
+
+const isEdge: Browser[] = ['edge', 'edge-ios', 'edge-chromium']
+const isChrome: Browser[] = ['chrome', 'crios', 'chromium-webview']
+const isSafari: Browser[] = ['safari', 'ios-webview']
+const isFirefox: Browser[] = ['firefox', 'fxios']
+const isOpera: Browser[] = ['opera', 'opera-mini']
+const isIE: Browser[] = ['ie', 'bb10']
+
+export type IsSomeBrowser = PrefixWithIs<PolularBrowserType>
+export const popularBrowsers: Record<IsSomeBrowser, Browser[]> = {
+  isEdge,
+  isChrome,
+  isSafari,
+  isFirefox,
+  isOpera,
+  isIE,
+}
+
 type UserAgentRule = [Browser, RegExp]
 
 export const browsers: UserAgentRule[] = [
@@ -58,9 +79,9 @@ export const browsers: UserAgentRule[] = [
   ['ie', /MSIE\s([0-9\.]+);.*Trident\/[4-7].0/],
   ['ie', /MSIE\s(7\.0)/],
   ['bb10', /BB10;\sTouch.*Version\/([0-9\.]+)/],
-  ['safari', /Version\/([0-9\._]+).*Safari/],
   ['facebook', /FB[AS]V\/([0-9\.]+)/],
   ['instagram', /Instagram\s([0-9\.]+)/],
+  ['safari', /Version\/([0-9\._]+).*Safari/],
   ['ios-webview', /AppleWebKit\/([0-9\.]+).*Mobile/],
   ['ios-webview', /AppleWebKit\/([0-9\.]+).*Gecko\)$/],
   ['android', /Android\s([0-9\.]+)/],

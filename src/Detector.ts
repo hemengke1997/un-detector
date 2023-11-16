@@ -1,6 +1,6 @@
-import { browsers } from './browser'
+import { type Browser, type IsSomeBrowser, browsers, popularBrowsers } from './browser'
 import { MobilePrefixRegExp, MobileRegExp } from './device'
-import { type IsSomeOs, type OperatingSystem, type PopularOsType, os, popularOsTypes } from './os'
+import { type IsSomeOs, type OperatingSystem, os, popularOsTypes } from './os'
 
 export type BrowserDetected = {
   platform?: string
@@ -11,6 +11,8 @@ export type BrowserDetected = {
   isLinux?: boolean
 } & {
   [key in IsSomeOs]?: boolean
+} & {
+  [key in IsSomeBrowser]?: boolean
 }
 
 export class Detector {
@@ -80,11 +82,21 @@ export class Detector {
           version.push(version.length === 1 ? ['0', '0'] : ['0'])
         }
 
-        return {
+        let detected: BrowserDetected = {}
+
+        const browserType = this.findBrowserType(definition[0])
+        if (browserType) {
+          detected[browserType] = true
+        }
+
+        detected = {
+          ...detected,
           platform: definition[0],
           version: version?.join('.'),
           versionNumber: Number(`${version?.[0]}.${versionTails}`),
         }
+
+        return detected
       })
       .shift()
   }
@@ -137,7 +149,15 @@ export class Detector {
   private findOsType(os: OperatingSystem): IsSomeOs | undefined {
     for (const [k, v] of Object.entries(popularOsTypes)) {
       if (v.includes(os)) {
-        return `is${k as PopularOsType}`
+        return k as IsSomeOs
+      }
+    }
+  }
+
+  private findBrowserType(browser: Browser): IsSomeBrowser | undefined {
+    for (const [k, v] of Object.entries(popularBrowsers)) {
+      if (v.includes(browser)) {
+        return k as IsSomeBrowser
       }
     }
   }

@@ -1,3 +1,5 @@
+import { type PrefixWithIs } from './type'
+
 export type OperatingSystem =
   | 'iOS'
   | 'Android OS'
@@ -57,13 +59,14 @@ export const os: OperatingSystemRule[] = [
   ['OS/2', /OS\/2/],
 ]
 
-export type PopularOsType = 'Android' | 'IOS' | 'Mac' | 'Windows'
+export type IsSomeOs = PrefixWithIs<PopularOsType>
+type PopularOsType = 'Android' | 'IOS' | 'Mac' | 'Windows' | 'Linux'
 
-export const popularOsTypes: Record<PopularOsType, OperatingSystem[]> = {
-  Android: ['Android OS'],
-  IOS: ['iOS'],
-  Mac: ['Mac OS'],
-  Windows: [
+export const popularOsTypes: Record<IsSomeOs, OperatingSystem[]> = {
+  isAndroid: ['Android OS'],
+  isIOS: ['iOS'],
+  isMac: ['Mac OS'],
+  isWindows: [
     'Windows 3.11',
     'Windows 95',
     'Windows 98',
@@ -78,7 +81,5 @@ export const popularOsTypes: Record<PopularOsType, OperatingSystem[]> = {
     'Windows ME',
     'Windows CE',
   ],
+  isLinux: ['Linux', 'Chrome OS', 'QNX', 'Sun OS'],
 }
-
-type IsSome<T extends string> = `is${T}`
-export type IsSomeOs = IsSome<PopularOsType>
