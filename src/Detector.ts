@@ -1,18 +1,19 @@
-import { type Browser, type IsSomeBrowser, browsers, popularBrowsers } from './browser'
-import { MobilePrefixRegExp, MobileRegExp } from './device'
-import { type IsSomeOs, type OperatingSystem, os, popularOsTypes } from './os'
+import { type Browser, type PopularBrowserType, browsers, popularBrowsers } from './browser'
+import { MobilePrefixRegExp, MobileRegExp, type PopularDeviceType } from './device'
+import { type OperatingSystem, type PopularOsType, os, popularOsTypes } from './os'
 
 export type BrowserDetected = {
   platform?: string
   os?: string
   version?: string
   versionNumber?: number
-  isMobile?: boolean
   isLinux?: boolean
 } & {
-  [key in IsSomeOs]?: boolean
+  [key in PopularBrowserType]?: boolean
 } & {
-  [key in IsSomeBrowser]?: boolean
+  [key in PopularDeviceType]?: boolean
+} & {
+  [key in PopularOsType]?: boolean
 }
 
 export class Detector {
@@ -113,14 +114,20 @@ export class Detector {
 
         switch (_os) {
           case 'Mac OS':
-            value = match.input.match(/Mac OS X ([0-9_]+)/i)?.[0].replace(/_/g, '.') || ''
+            value = this.userAgent.match(/Mac OS X ([0-9_]+)/i)?.[0].replace(/_/g, '.') || ''
             break
           case 'Android OS':
-            value = match.input.match(/Android ([0-9.]+)/i)?.[0] || ''
+            value = this.userAgent.match(/Android ([0-9.]+)/i)?.[0] || ''
             break
-          case 'iOS':
-            value = match.input.match(/\w+\sOS ([0-9_]+)/i)?.[0].replace(/_/g, '.') || ''
+          case 'iOS': {
+            value = this.userAgent.match(/([0-9_]+)(?= like Mac OS X)/i)?.[0].replace(/_/g, '.') || ''
+            let iosRegex = os.find(([_os]) => _os === 'iOS')![1]
+            if (iosRegex) {
+              iosRegex = new RegExp(`${iosRegex.source}(\\s?\\w+)?(?=;)`, 'i')
+              value = (`${iosRegex.exec(this.userAgent)?.[0]} ` || '') + value
+            }
             break
+          }
           case 'Linux':
             detected.isLinux = true
             break
@@ -146,18 +153,18 @@ export class Detector {
     return { isMobile: mobile }
   }
 
-  private findOsType(os: OperatingSystem): IsSomeOs | undefined {
+  private findOsType(os: OperatingSystem): PopularOsType | undefined {
     for (const [k, v] of Object.entries(popularOsTypes)) {
       if (v.includes(os)) {
-        return k as IsSomeOs
+        return k as PopularOsType
       }
     }
   }
 
-  private findBrowserType(browser: Browser): IsSomeBrowser | undefined {
+  private findBrowserType(browser: Browser): PopularBrowserType | undefined {
     for (const [k, v] of Object.entries(popularBrowsers)) {
       if (v.includes(browser)) {
-        return k as IsSomeBrowser
+        return k as PopularBrowserType
       }
     }
   }

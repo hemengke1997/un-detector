@@ -212,7 +212,7 @@ describe('test method: detect()', () => {
 
     expect(result.isMobile).to.true
     expect(result.platform).to.equal('safari')
-    expect(result.os).to.equal('iPhone OS 9.1')
+    expect(result.os).to.equal('iPhone 9.1')
     expect(result.version).to.equal('9.0.0')
     expect(result.versionNumber).to.equal(9)
     expect(result.isIOS).to.true
@@ -227,11 +227,101 @@ describe('test method: detect()', () => {
     const result = detect(userAgent)
     expect(result.isMobile).to.true
     expect(result.platform).to.equal('crios')
-    expect(result.os).to.equal('iPhone OS 5.1.1')
+    expect(result.os).to.equal('iPhone 5.1.1')
     expect(result.version).to.equal('19.0.1084')
     expect(result.versionNumber).to.equal(19.01084)
     expect(result.isIOS).to.true
     expect(os.isIOS(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isChrome(userAgent)).to.true
+  })
+
+  test('detect  Chrome on iPod (Mobile)', () => {
+    const userAgent =
+      'Mozilla/5.0 (iPod; CPU iPhone OS 17_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/119.0.6045.109 Mobile/15E148 Safari/604.1'
+    const result = detect(userAgent)
+    expect(result.isMobile).to.true
+    expect(result.platform).to.equal('crios')
+    expect(result.os).to.equal('iPod 17.1')
+    expect(result.version).to.equal('119.0.6045')
+    expect(result.versionNumber).to.equal(119.06045)
+    expect(result.isIOS).to.true
+    expect(os.isIOS(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isChrome(userAgent)).to.true
+  })
+
+  test('detect Firefox on iPod (Mobile)', () => {
+    const userAgent =
+      'Mozilla/5.0 (iPod touch; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/604.5.6 (KHTML, like Gecko) FxiOS/119.0 Mobile/15E148 Safari/605.1.15'
+    const result = detect(userAgent)
+    expect(result.isMobile).to.true
+    expect(result.platform).to.equal('fxios')
+    expect(result.os).to.equal('iPod touch 14.1')
+    expect(result.version).to.equal('119.0.0')
+    expect(result.versionNumber).to.equal(119)
+    expect(result.isIOS).to.true
+    expect(os.isIOS(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isFirefox(userAgent)).to.true
+  })
+
+  test('detect  Safari on iPod (Mobile)', () => {
+    const userAgent =
+      'Mozilla/5.0 (iPod touch; CPU iPhone 17_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Mobile/15E148 Safari/604.1'
+    const result = detect(userAgent)
+    expect(result.isMobile).to.true
+    expect(result.platform).to.equal('safari')
+    expect(result.os).to.equal('iPod touch 17.1')
+    expect(result.version).to.equal('17.1.0')
+    expect(result.versionNumber).to.equal(17.1)
+    expect(result.isIOS).to.true
+    expect(os.isIOS(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isSafari(userAgent)).to.true
+  })
+
+  test('detect  Firefox on iPad (Mobile)', () => {
+    const userAgent =
+      'Mozilla/5.0 (iPad; CPU OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/119.0 Mobile/15E148 Safari/605.1.15'
+    const result = detect(userAgent)
+    expect(result.isMobile).to.true
+    expect(result.platform).to.equal('fxios')
+    expect(result.os).to.equal('iPad 14.1')
+    expect(result.version).to.equal('119.0.0')
+    expect(result.versionNumber).to.equal(119)
+    expect(result.isIOS).to.true
+    expect(os.isIOS(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isFirefox(userAgent)).to.true
+  })
+
+  test('detect  Safari on iPad (Mobile)', () => {
+    const userAgent =
+      'Mozilla/5.0 (iPad; CPU OS 17_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Mobile/15E148 Safari/604.1'
+    const result = detect(userAgent)
+    expect(result.isMobile).to.true
+    expect(result.platform).to.equal('safari')
+    expect(result.os).to.equal('iPad 17.1')
+    expect(result.version).to.equal('17.1.0')
+    expect(result.versionNumber).to.equal(17.1)
+    expect(result.isIOS).to.true
+    expect(os.isIOS(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.true
+    expect(browser.isSafari(userAgent)).to.true
+  })
+
+  test('detect Chrome on Generic Smartphone', () => {
+    const userAgent =
+      'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.66 Mobile Safari/537.36'
+    const result = detect(userAgent)
+    expect(result.isMobile).to.true
+    expect(result.platform).to.equal('chrome')
+    expect(result.os).to.equal('Android 10')
+    expect(result.version).to.equal('119.0.6045')
+    expect(result.versionNumber).to.equal(119.06045)
+    expect(result.isAndroid).to.true
+    expect(os.isAndroid(userAgent)).to.true
     expect(device.isMobile(userAgent)).to.true
     expect(browser.isChrome(userAgent)).to.true
   })
@@ -300,7 +390,7 @@ describe('test method: detect()', () => {
     const result = detect(userAgent)
     expect(result.isMobile).to.true
     expect(result.platform).to.equal('fxios')
-    expect(result.os).to.equal('iPhone OS 8.3')
+    expect(result.os).to.equal('iPad 8.3')
     expect(result.version).to.equal('3.2.0')
     expect(result.versionNumber).to.equal(3.2)
     expect(result.isIOS).to.true
@@ -324,13 +414,13 @@ describe('test method: detect()', () => {
     expect(browser.isSafari(userAgent)).to.true
   })
 
-  test('detect  iOS WebView on iOS', () => {
+  test('detect  iOS WebView on iPad', () => {
     const userAgent =
       'User-Agent: Mozilla/5.0 (iPad; U; CPU OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Mobile'
     const result = detect(userAgent)
     expect(result.isMobile).to.true
     expect(result.platform).to.equal('ios-webview')
-    expect(result.os).to.equal('CPU OS 4.3.2')
+    expect(result.os).to.equal('iPad 4.3.2')
     expect(result.version).to.equal('533.17.9')
     expect(result.versionNumber).to.equal(533.179)
     expect(result.isIOS).to.true
@@ -345,7 +435,7 @@ describe('test method: detect()', () => {
     const result = detect(userAgent)
     expect(result.isMobile).to.true
     expect(result.platform).to.equal('edge-ios')
-    expect(result.os).to.equal('iPhone OS 12.1.4')
+    expect(result.os).to.equal('iPhone 12.1.4')
     expect(result.version).to.equal('44.2.1')
     expect(result.versionNumber).to.equal(44.21)
     expect(result.isIOS).to.true
@@ -358,6 +448,8 @@ describe('test method: detect()', () => {
     const userAgent =
       'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36'
     const result = detect(userAgent)
+    console.log(result, 'result')
+
     expect(result.isMobile).to.true
     expect(result.platform).to.equal('chromium-webview')
     expect(result.os).to.equal('Android 5.1.1')

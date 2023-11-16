@@ -1,5 +1,3 @@
-import { type PrefixWithIs } from './type'
-
 export type OperatingSystem =
   | 'iOS'
   | 'Android OS'
@@ -19,13 +17,8 @@ export type OperatingSystem =
   | 'Windows 10'
   | 'Windows ME'
   | 'Windows CE'
-  | 'Open BSD'
-  | 'Sun OS'
   | 'Linux'
   | 'Mac OS'
-  | 'QNX'
-  | 'BeOS'
-  | 'OS/2'
   | 'Chrome OS'
 
 type OperatingSystemRule = [OperatingSystem & string, RegExp]
@@ -49,20 +42,16 @@ export const os: OperatingSystemRule[] = [
   ['Windows 10', /(Windows NT 10.0)/],
   ['Windows ME', /Windows ME/],
   ['Windows CE', /Windows CE|WinCE|Microsoft Pocket Internet Explorer/],
-  ['Open BSD', /OpenBSD/],
-  ['Sun OS', /SunOS/],
   ['Chrome OS', /CrOS/],
   ['Linux', /(Linux)|(X11)/],
-  ['Mac OS', /(Mac_PowerPC)|(Macintosh)|(Mac OS X)/],
-  ['QNX', /QNX/],
-  ['BeOS', /BeOS/],
-  ['OS/2', /OS\/2/],
+  ['Mac OS', /(Mac_PowerPC)|(Macintosh)|(Mac OS X?)/],
 ]
 
-export type IsSomeOs = PrefixWithIs<PopularOsType>
-type PopularOsType = 'Android' | 'IOS' | 'Mac' | 'Windows' | 'Linux'
+export const isPopularOs = ['isAndroid', 'isIOS', 'isLinux', 'isMac', 'isWindows'] as const
 
-export const popularOsTypes: Record<IsSomeOs, OperatingSystem[]> = {
+export type PopularOsType = (typeof isPopularOs)[number]
+
+export const popularOsTypes: Record<PopularOsType, OperatingSystem[]> = {
   isAndroid: ['Android OS'],
   isIOS: ['iOS'],
   isMac: ['Mac OS'],
@@ -81,5 +70,5 @@ export const popularOsTypes: Record<IsSomeOs, OperatingSystem[]> = {
     'Windows ME',
     'Windows CE',
   ],
-  isLinux: ['Linux', 'Chrome OS', 'QNX', 'Sun OS'],
+  isLinux: ['Linux', 'Chrome OS'],
 }
