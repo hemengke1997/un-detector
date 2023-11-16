@@ -2,14 +2,16 @@
   "name": "all-detector",
   "version": "0.0.1",
   "packageManager": "pnpm@8.10.5",
-  "description": "A simple and zero-dependency browser and node env detector.",
+  "description": "A simple and zero-dependency browser and os detector.",
   "type": "module",
   "keywords": [
     "browser detector",
     "browser type",
     "node type",
-    "env",
-    "env detector"
+    "os",
+    "os detector",
+    "detect",
+    "useragent"
   ],
   "license": "MIT",
   "repository": {

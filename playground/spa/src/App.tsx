@@ -5,6 +5,8 @@ import './App.css'
 function App() {
   const [detected] = useState(detect())
 
+  console.log(detected, 'detected')
+
   return (
     <div className='App'>
       <h1>Detected browser UA</h1>
