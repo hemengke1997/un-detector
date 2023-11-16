@@ -1,3 +1,12 @@
+## [0.0.3](https://github.com/hemengke1997/un-detector/compare/v0.0.2...v0.0.3) (2023-11-16)
+
+
+### Performance Improvements
+
+* refactor device, os, and browser detection ([5cb16fd](https://github.com/hemengke1997/un-detector/commit/5cb16fd7386a67459edb76de92a0d4ff68d2edb5))
+
+
+
 ## [0.0.2](https://github.com/hemengke1997/un-detector/compare/v0.0.1...v0.0.2) (2023-11-16)
 
 
