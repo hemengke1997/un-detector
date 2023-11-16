@@ -1,5 +1,5 @@
-import { detect } from 'all-detector'
 import { useState } from 'react'
+import { detect } from 'un-detector'
 import './App.css'
 
 function App() {

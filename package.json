@@ -1,6 +1,7 @@
 {
-  "name": "all-detector",
+  "name": "un-detector",
   "version": "0.0.1",
+  "private": false,
   "packageManager": "pnpm@8.10.5",
   "description": "A simple and zero-dependency browser and os detector.",
   "type": "module",
@@ -16,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hemengke1997/all-detector.git"
+    "url": "git+https://github.com/hemengke1997/un-detector.git"
   },
   "author": "hemengke <https://github.com/hemengke1997>",
   "files": [
@@ -33,6 +34,9 @@
       "require": "./dist/index.cjs",
       "import": "./dist/index.js"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "dev": "simple-git-hooks && tsup --watch",

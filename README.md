@@ -1,15 +1,15 @@
-# all-detector
+# un-detector
 
 ## Install
 
 ```bash
-pnpm add all-detector
+pnpm add un-detector
 ```
 
 ## Usage
 
 ```ts
-import { detect } from 'all-detector';
+import { detect } from 'un-detector';
 
 const detected = detect();
 ```
