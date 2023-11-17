@@ -3,6 +3,8 @@ import { describe, expect, test } from 'vitest'
 import { browser, detect, device, os } from '../src'
 import { Detector } from '../src/Detector'
 
+// https://www.useragents.me/
+
 describe('test method: detect()', () => {
   test('detect  Chrome on Windows 10', () => {
     const userAgent =
