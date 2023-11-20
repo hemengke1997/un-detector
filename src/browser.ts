@@ -1,4 +1,4 @@
-import { BROWSER, BRWOSER_MAPPER, NAME, VERSION } from './constants'
+import { BROWSER, BRWOSER_MAPPER, DEVICE_MAPPER, NAME, VERSION } from './constants'
 import { type RegexMap } from './type'
 import { strMapper } from './util'
 
@@ -70,15 +70,11 @@ export const BrwoserRegxMapper: RegexMap = [
   [
     /micromessenger\/([\w\.]+)/i, // WeChat
   ],
-  [VERSION, [NAME, 'WeChat']],
-  [
-    /konqueror\/([\w\.]+)/i, // Konqueror
-  ],
-  [VERSION, [NAME, 'Konqueror']],
+  [VERSION, [NAME, BRWOSER_MAPPER.WeChat]],
   [
     /trident.+rv[: ]([\w\.]{1,9})\b.+like gecko/i, // IE11
   ],
-  [VERSION, [NAME, 'IE']],
+  [VERSION, [NAME, BRWOSER_MAPPER.IE]],
   [
     /ya(?:search)?browser\/([\w\.]+)/i, // Yandex
   ],
@@ -96,17 +92,9 @@ export const BrwoserRegxMapper: RegexMap = [
   ],
   [VERSION, [NAME, `${BRWOSER_MAPPER.Opera} Touch`]],
   [
-    /coc_coc\w+\/([\w\.]+)/i, // Coc Coc Browser
-  ],
-  [VERSION, [NAME, 'Coc Coc']],
-  [
     /dolfin\/([\w\.]+)/i, // Dolphin
   ],
   [VERSION, [NAME, 'Dolphin']],
-  [
-    /coast\/([\w\.]+)/i, // Opera Coast
-  ],
-  [VERSION, [NAME, `${BRWOSER_MAPPER.Opera} Coast`]],
   [
     /miuibrowser\/([\w\.]+)/i, // MIUI Browser
   ],
@@ -142,7 +130,7 @@ export const BrwoserRegxMapper: RegexMap = [
     // WebView
     /((?:fban\/fbios|fb_iab\/fb4a)(?!.+fbav)|;fbav\/([\w\.]+);)/i, // Facebook App for iOS & Android
   ],
-  [[NAME, BRWOSER_MAPPER.Facebook], VERSION],
+  [[NAME, DEVICE_MAPPER.Facebook], VERSION],
   [
     /(kakao(?:talk|story))[\/ ]([\w\.]+)/i, // Kakao App
     /(naver)\(.*?(\d+\.[\w\.]+).*\)/i, // Naver InApp
@@ -178,7 +166,7 @@ export const BrwoserRegxMapper: RegexMap = [
   [
     /version\/([\w\.\,]+) .*mobile\/\w+ (safari)/i, // Mobile Safari
   ],
-  [VERSION, [NAME, BRWOSER_MAPPER.Safari]],
+  [VERSION, [NAME, BRWOSER_MAPPER.Mobile_Safari]],
   [
     /version\/([\w(\.|\,)]+) .*(mobile ?safari|safari)/i, // Safari & Safari Mobile
   ],
@@ -198,10 +186,6 @@ export const BrwoserRegxMapper: RegexMap = [
   ],
   [[NAME, 'Netscape'], VERSION],
   [
-    /mobile vr; rv:([\w\.]+)\).+firefox/i, // Firefox Reality
-  ],
-  [VERSION, [NAME, `${BRWOSER_MAPPER.Firefox} Reality`]],
-  [
     /ekiohf.+(flow)\/([\w\.]+)/i, // Flow
     /(swiftfox)/i, // Swiftfox
     /(icedragon|iceweasel|camino|chimera|fennec|maemo browser|minimo|conkeror|klar)[\/ ]?([\w\.\+]+)/i,
@@ -218,8 +202,4 @@ export const BrwoserRegxMapper: RegexMap = [
     /panasonic;(viera)/i, // Panasonic Viera
   ],
   [NAME, VERSION],
-  [
-    /(cobalt)\/([\w\.]+)/i, // Cobalt
-  ],
-  [NAME, [VERSION, /master.|lts./, '']],
 ]

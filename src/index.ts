@@ -1,22 +1,5 @@
 import { Detector } from './Detector'
-import { IsPopularBrowser } from './browser'
-import { IsPopularDevice } from './device'
-import { IsPopularOs } from './os'
-import { type DetectFn } from './type'
-
-function removeIsAndLowerize(name: string) {
-  return name.replace(/^is/, '').toLowerCase()
-}
-
-function iife<T extends readonly string[] = any[], U extends T[number] = T[number]>(types: T) {
-  return types.reduce(
-    (acc, key) => {
-      acc[key as U] = (ua?: string) => detect(ua).is[removeIsAndLowerize(key)]
-      return acc
-    },
-    {} as Record<U, DetectFn>,
-  )
-}
+import { iife } from './util'
 
 const injectableNavigator = typeof window !== 'undefined' ? window.navigator : undefined
 
@@ -26,8 +9,8 @@ export function detect(userAgent?: string) {
   return new Detector(userAgent, injectableNavigator, injectableProcess).detect()
 }
 
-export const os = iife(IsPopularOs)
+export const os = iife(['mac', 'windows', 'iOS', 'android', 'winPhone', 'linux'] as const)
 
-export const browser = iife(IsPopularBrowser)
+export const browser = iife(['edge', 'chrome', 'safari', 'firefox', 'opera', 'IE', 'chromium'] as const)
 
-export const device = iife(IsPopularDevice)
+export const device = iife(['iphone', 'ipad', 'ipod', 'mobile', 'mobileOnly', 'tablet'] as const)

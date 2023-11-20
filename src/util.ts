@@ -1,5 +1,6 @@
+import { detect } from '.'
 import { UNKNOWN } from './constants'
-import { type EvenType, type OddType, type RemoveArrayType } from './type'
+import { type DetectFn, type EvenType, type OddType, type RemoveArrayType } from './type'
 
 type MapType = { [key: string]: string | string[] }
 
@@ -120,4 +121,33 @@ export function trim(str: string | undefined, len: number) {
 
 export function lowerize(str: string | undefined) {
   return str?.toLowerCase()
+}
+
+export function removeIsAndLowerize(name: string) {
+  return name.replace(/^is/, '').toLowerCase()
+}
+
+function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+export const isIOS13Check = (type: string) => {
+  const nav = window.navigator
+  return (
+    (nav &&
+      nav.platform &&
+      (nav.platform.includes(type) ||
+        (nav.platform === 'MacIntel' && nav.maxTouchPoints > 1 && !(window as any).MSStream))) ||
+    false
+  )
+}
+
+export function iife<T extends readonly string[] = string[], U extends T[number] = T[number]>(types: T) {
+  return types.reduce(
+    (acc, key) => {
+      acc[`is${capitalize(key) as Capitalize<U>}`] = (ua?: string) => detect(ua).is[key]
+      return acc
+    },
+    {} as Record<`is${Capitalize<U>}`, DetectFn>,
+  )
 }

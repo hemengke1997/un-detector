@@ -1,20 +1,42 @@
 import { BrwoserRegxMapper } from './browser'
-import { BRWOSER_MAPPER, OS_MAPPER } from './constants'
-import { DeviceRegexMapper, MobileRegExp } from './device'
+import { BRWOSER_MAPPER, DEVICE_TYPE_MAPPER, MODEL_MAPPER, OS_MAPPER } from './constants'
+import { DeviceRegexMapper } from './device'
 import { OsRegexMapper } from './os'
-import { type Result, majorize, rgxMapper } from './util'
+import { type Result, isIOS13Check, majorize, rgxMapper } from './util'
 
 export type BrowserDetected = {
   browser: { majorVersion?: string } & Result
   os: Result
   device: { model?: string; vendor?: string } & Result
   is: {
+    // device type
     mobile: boolean
+    mobileOnly: boolean
+    tablet: boolean
+
+    // os
     mac: boolean
     windows: boolean
-    ios: boolean
+    iOS: boolean
     android: boolean
-  } & { [key in string]: any }
+    winPhone: boolean
+    linux: boolean
+
+    // browser
+    edge: boolean
+    chrome: boolean
+    safari: boolean
+    firefox: boolean
+    opera: boolean
+    IE: boolean
+    chromium: boolean
+    wechat: boolean
+
+    // device model
+    iPhone: boolean
+    iPad: boolean
+    iPod: boolean
+  } & Record<string, boolean>
 }
 
 export class Detector {
@@ -46,8 +68,11 @@ export class Detector {
     // browser env
     const { browser } = this.detectBrowser()
     const { os } = this.detectOS()
-    const { isMobile } = this.detectMobile()
     const { device } = this.detectDevice()
+
+    const getIPad13 = () => isIOS13Check('iPad')
+    const getIphone13 = () => isIOS13Check('iPhone')
+    const getIPod13 = () => isIOS13Check('iPod')
 
     return {
       os: {
@@ -62,29 +87,41 @@ export class Detector {
       },
       is: {
         // device type
-        mobile: isMobile,
+        mobile: device.type === DEVICE_TYPE_MAPPER.mobile || device.type === DEVICE_TYPE_MAPPER.tablet || getIPad13(),
+        mobileOnly: device.type === DEVICE_TYPE_MAPPER.mobile,
+        tablet: device.type === DEVICE_TYPE_MAPPER.tablet || getIPad13(),
 
         // os
         mac: os.name === OS_MAPPER.Mac_OS,
         windows: os.name === OS_MAPPER.Windows,
-        ios: os.name === OS_MAPPER.iOS,
+        iOS: os.name === OS_MAPPER.iOS,
         android: os.name === OS_MAPPER.Android,
-        // linux: os.name, TODO
+        winPhone: os.name === OS_MAPPER.Windows_Phone,
+        linux: os.name === OS_MAPPER.Linux,
 
         // browser
         edge: browser.name === BRWOSER_MAPPER.Edge,
-        chrome: browser.name?.includes(BRWOSER_MAPPER.Chrome),
-        safari: browser.name === BRWOSER_MAPPER.Safari || browser.name?.startsWith('ios'),
+        chrome: browser.name?.includes(BRWOSER_MAPPER.Chrome) || false,
+        safari:
+          browser.name === BRWOSER_MAPPER.Safari ||
+          browser.name === BRWOSER_MAPPER.Mobile_Safari ||
+          browser.name?.startsWith('ios') ||
+          false,
         firefox: browser.name === BRWOSER_MAPPER.Firefox,
         opera: browser.name === BRWOSER_MAPPER.Opera,
-        ie: browser.name === BRWOSER_MAPPER.IE,
+        IE: browser.name === BRWOSER_MAPPER.IE || browser.name === BRWOSER_MAPPER.Internet_Explorer,
+        chromium: browser.name === BRWOSER_MAPPER.Chromium,
+        wechat: browser.name === BRWOSER_MAPPER.WeChat,
 
         // device model
+        iPhone: device.model === MODEL_MAPPER.iPhone || getIphone13(),
+        iPad: device.model === MODEL_MAPPER.iPad || getIPad13(),
+        iPod: device.model === MODEL_MAPPER.iPod || getIPod13(),
       },
     }
   }
 
-  private detectBrowser() {
+  private detectBrowser(): { browser: Result & { majorVersion?: string } } {
     return {
       browser: rgxMapper(this.userAgent, BrwoserRegxMapper),
     }
@@ -96,12 +133,7 @@ export class Detector {
     }
   }
 
-  private detectMobile() {
-    const mobile = MobileRegExp.test(this.userAgent)
-    return { isMobile: mobile }
-  }
-
-  private detectDevice() {
+  private detectDevice(): { device: Result & { model?: string; vendor?: string } } {
     return {
       device: rgxMapper(this.userAgent, DeviceRegexMapper),
     }

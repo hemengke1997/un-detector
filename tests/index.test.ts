@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest'
 import { browser, detect, device, os } from '../src'
 import { Detector } from '../src/Detector'
-import { BRWOSER_MAPPER, MODEL_MAPPER, OS_MAPPER } from '../src/constants'
+import { BRWOSER_MAPPER, DEVICE_MAPPER, MODEL_MAPPER, OS_MAPPER } from '../src/constants'
 
 // https://www.useragents.me/
 
@@ -217,7 +217,7 @@ describe('test method: detect()', () => {
     const result = detect(userAgent)
 
     expect(result.is.mobile).to.true
-    expect(result.browser.name).to.equal(BRWOSER_MAPPER.Safari)
+    expect(result.browser.name).to.equal(BRWOSER_MAPPER.Mobile_Safari)
     expect(result.browser.version).to.equal('9.0')
     expect(result.browser.majorVersion).to.equal('9')
     expect(result.device.model).to.equal('iPhone')
@@ -297,7 +297,7 @@ describe('test method: detect()', () => {
       'Mozilla/5.0 (iPad; CPU OS 17_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Mobile/15E148 Safari/604.1'
     const result = detect(userAgent)
     expect(result.is.mobile).to.true
-    expect(result.browser.name).to.equal(BRWOSER_MAPPER.Safari)
+    expect(result.browser.name).to.equal(BRWOSER_MAPPER.Mobile_Safari)
     expect(result.os.name).to.equal(OS_MAPPER.iOS)
     expect(result.os.version).toEqual('17.1')
     expect(result.device.model).toEqual(MODEL_MAPPER.iPad)
@@ -482,7 +482,7 @@ describe('test method: detect()', () => {
     const result = detect(userAgent)
     expect(result.is.mobile).to.true
     expect(result.browser.name).to.equal(BRWOSER_MAPPER.Safari)
-    expect(result.os.name).to.equal(OS_MAPPER.BlackBerry)
+    expect(result.os.name).to.equal(DEVICE_MAPPER.BlackBerry)
     expect(result.os.version).to.eq('10')
     expect(result.browser.version).to.equal('7.2.0.0')
     expect(result.browser.majorVersion).to.equal('7')

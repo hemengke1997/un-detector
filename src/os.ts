@@ -2,9 +2,9 @@ import { BRWOSER_MAPPER, DEVICE_MAPPER, NAME, OS_MAPPER, VERSION } from './const
 import { type RegexMap } from './type'
 import { strMapper } from './util'
 
-export const IsPopularOs = ['isAndroid', 'isIOS', 'isLinux', 'isMac', 'isWindows'] as const
+// export const IsPopularOs = ['isAndroid', 'isIOS', 'isLinux', 'isMac', 'isWindows'] as const
 
-export type PopularOsType = (typeof IsPopularOs)[number]
+// export type PopularOsType = (typeof IsPopularOs)[number]
 
 const windowsVersionMap: Record<string, string | string[]> = {
   'ME': '4.90',
@@ -34,7 +34,7 @@ export const OsRegexMapper: RegexMap = [
   [NAME, [VERSION, strMapper, windowsVersionMap]],
   [/(win(?=3|9|n)|win 9x )([nt\d\.]+)/i],
   [
-    [NAME, 'Windows'],
+    [NAME, OS_MAPPER.Windows],
     [VERSION, strMapper, windowsVersionMap],
   ],
   [
@@ -45,7 +45,7 @@ export const OsRegexMapper: RegexMap = [
   ],
   [
     [VERSION, /_/g, '.'],
-    [NAME, 'iOS'],
+    [NAME, OS_MAPPER.iOS],
   ],
   [
     /(mac os x) ?([\w\. ]*)/i,
@@ -73,10 +73,6 @@ export const OsRegexMapper: RegexMap = [
   ],
   [VERSION, [NAME, DEVICE_MAPPER.BlackBerry]],
   [
-    /(?:symbian ?os|symbos|s60(?=;)|series60)[-\/ ]?([\w\.]*)/i, // Symbian
-  ],
-  [VERSION, [NAME, 'Symbian']],
-  [
     /mozilla\/[\d\.]+ \((?:mobile|tablet|tv|mobile; [\w ]+); rv:.+ gecko\/([\w\.]+)/i, // Firefox OS
   ],
   [VERSION, [NAME, `${BRWOSER_MAPPER.Firefox} OS`]],
@@ -89,11 +85,6 @@ export const OsRegexMapper: RegexMap = [
     /watch(?: ?os[,\/]|\d,\d\/)([\d\.]+)/i, // watchOS
   ],
   [VERSION, [NAME, 'watchOS']],
-  [
-    // Google Chromecast
-    /crkey\/([\d\.]+)/i, // Google Chromecast
-  ],
-  [VERSION, [NAME, `${BRWOSER_MAPPER.Chrome}cast`]],
   [
     /(cros) [\w]+(?:\)| ([\w\.]+)\b)/i, // Chromium OS
   ],
@@ -109,25 +100,13 @@ export const OsRegexMapper: RegexMap = [
     /(xbox); +xbox ([^\);]+)/i, // Microsoft Xbox (360, One, X, S, Series X, Series S)
 
     // Other
-    /\b(joli|palm)\b ?(?:os)?\/?([\w\.]*)/i, // Joli/Palm
-    /(mint)[\/\(\) ]?(\w*)/i, // Mint
-    /(mageia|vectorlinux)[; ]/i, // Mageia/VectorLinux
+    /(vectorlinux)[; ]/i, // Mageia/VectorLinux
     /([kxln]?ubuntu|debian|suse|opensuse|gentoo|arch(?= linux)|slackware|fedora|mandriva|centos|pclinuxos|red ?hat|zenwalk|linpus|raspbian|plan 9|minix|risc os|contiki|deepin|manjaro|elementary os|sabayon|linspire)(?: gnu\/linux)?(?: enterprise)?(?:[- ]linux)?(?:-gnu)?[-\/ ]?(?!chrom|package)([-\w\.]*)/i,
     // Ubuntu/Debian/SUSE/Gentoo/Arch/Slackware/Fedora/Mandriva/CentOS/PCLinuxOS/RedHat/Zenwalk/Linpus/Raspbian/Plan9/Minix/RISCOS/Contiki/Deepin/Manjaro/elementary/Sabayon/Linspire
-    /(hurd|linux) ?([\w\.]*)/i, // Hurd/Linux
-    /(gnu) ?([\w\.]*)/i, // GNU
-    /\b([-frentopcghs]{0,5}bsd|dragonfly)[\/ ]?(?!amd|[ix346]{1,2}86)([\w\.]*)/i, // FreeBSD/NetBSD/OpenBSD/PC-BSD/GhostBSD/DragonFly
-    /(haiku) (\w+)/i, // Haiku
+    /(linux) ?([\w\.]*)/i, // Hurd/Linux
   ],
   [NAME, VERSION],
   [
-    /(sunos) ?([\w\.\d]*)/i, // Solaris
-  ],
-  [[NAME, 'Solaris'], VERSION],
-  [
-    /((?:open)?solaris)[-\/ ]?([\w\.]*)/i, // Solaris
-    /(aix) ((\d)(?=\.|\)| )[\w\.])*/i, // AIX
-    /\b(beos|os\/2|amigaos|morphos|openvms|fuchsia|hp-ux|serenityos)/i, // BeOS/OS2/AmigaOS/MorphOS/OpenVMS/Fuchsia/HP-UX/SerenityOS
     /(unix) ?([\w\.]*)/i, // UNIX
   ],
   [NAME, VERSION],
