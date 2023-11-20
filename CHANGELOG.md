@@ -1,3 +1,12 @@
+## [0.0.4](https://github.com/hemengke1997/un-detector/compare/v0.0.3...v0.0.4) (2023-11-20)
+
+
+### Features
+
+* use `ua-parser-js` ([a9755c0](https://github.com/hemengke1997/un-detector/commit/a9755c0ce669719fa3b1bb1f94f8ebd909de855a))
+
+
+
 ## [0.0.3](https://github.com/hemengke1997/un-detector/compare/v0.0.2...v0.0.3) (2023-11-16)
 
 
