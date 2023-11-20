@@ -1,74 +1,134 @@
-export type OperatingSystem =
-  | 'iOS'
-  | 'Android OS'
-  | 'BlackBerry OS'
-  | 'Windows Mobile'
-  | 'Amazon OS'
-  | 'Windows 3.11'
-  | 'Windows 95'
-  | 'Windows 98'
-  | 'Windows 2000'
-  | 'Windows XP'
-  | 'Windows Server 2003'
-  | 'Windows Vista'
-  | 'Windows 7'
-  | 'Windows 8'
-  | 'Windows 8.1'
-  | 'Windows 10'
-  | 'Windows ME'
-  | 'Windows CE'
-  | 'Linux'
-  | 'Mac OS'
-  | 'Chrome OS'
+import { BRWOSER_MAPPER, DEVICE_MAPPER, NAME, OS_MAPPER, VERSION } from './constants'
+import { type RegexMap } from './type'
+import { strMapper } from './util'
 
-type OperatingSystemRule = [OperatingSystem & string, RegExp]
+export const IsPopularOs = ['isAndroid', 'isIOS', 'isLinux', 'isMac', 'isWindows'] as const
 
-export const os: OperatingSystemRule[] = [
-  ['iOS', /iP(hone|od|ad)/],
-  ['Android OS', /Android/],
-  ['BlackBerry OS', /BlackBerry|BB10/],
-  ['Windows Mobile', /IEMobile/],
-  ['Amazon OS', /Kindle/],
-  ['Windows 3.11', /Win16/],
-  ['Windows 95', /(Windows 95)|(Win95)|(Windows_95)/],
-  ['Windows 98', /(Windows 98)|(Win98)/],
-  ['Windows 2000', /(Windows NT 5.0)|(Windows 2000)/],
-  ['Windows XP', /(Windows NT 5.1)|(Windows XP)/],
-  ['Windows Server 2003', /(Windows NT 5.2)/],
-  ['Windows Vista', /(Windows NT 6.0)/],
-  ['Windows 7', /(Windows NT 6.1)/],
-  ['Windows 8', /(Windows NT 6.2)/],
-  ['Windows 8.1', /(Windows NT 6.3)/],
-  ['Windows 10', /(Windows NT 10.0)/],
-  ['Windows ME', /Windows ME/],
-  ['Windows CE', /Windows CE|WinCE|Microsoft Pocket Internet Explorer/],
-  ['Chrome OS', /CrOS/],
-  ['Linux', /(Linux)|(X11)/],
-  ['Mac OS', /(Mac_PowerPC)|(Macintosh)|(Mac OS X?)/],
-]
+export type PopularOsType = (typeof IsPopularOs)[number]
 
-export const isPopularOs = ['isAndroid', 'isIOS', 'isLinux', 'isMac', 'isWindows'] as const
-
-export type PopularOsType = (typeof isPopularOs)[number]
-
-export const popularOsTypes: Record<PopularOsType, OperatingSystem[]> = {
-  isAndroid: ['Android OS'],
-  isIOS: ['iOS'],
-  isMac: ['Mac OS'],
-  isWindows: [
-    'Windows 3.11',
-    'Windows 95',
-    'Windows 98',
-    'Windows 2000',
-    'Windows XP',
-    'Windows Server 2003',
-    'Windows Vista',
-    'Windows 7',
-    'Windows 8',
-    'Windows 8.1',
-    'Windows 10',
-    'Windows ME',
-    'Windows CE',
-  ],
-  isLinux: ['Linux', 'Chrome OS'],
+const windowsVersionMap: Record<string, string | string[]> = {
+  'ME': '4.90',
+  'NT 3.11': 'NT3.51',
+  'NT 4.0': 'NT4.0',
+  '2000': 'NT 5.0',
+  'XP': ['NT 5.1', 'NT 5.2'],
+  'Vista': 'NT 6.0',
+  '7': 'NT 6.1',
+  '8': 'NT 6.2',
+  '8.1': 'NT 6.3',
+  '10': ['NT 6.4', 'NT 10.0'],
+  'RT': 'ARM',
 }
+
+export const OsRegexMapper: RegexMap = [
+  [
+    // Windows
+    /microsoft (windows) (vista|xp)/i, // Windows (iTunes)
+  ],
+  [NAME, VERSION],
+  [
+    /(windows) nt 6\.2; (arm)/i, // Windows RT
+    /(windows (?:phone(?: os)?|mobile))[\/ ]?([\d\.\w ]*)/i, // Windows Phone
+    /(windows)[\/ ]?([ntce\d\. ]+\w)(?!.+xbox)/i,
+  ],
+  [NAME, [VERSION, strMapper, windowsVersionMap]],
+  [/(win(?=3|9|n)|win 9x )([nt\d\.]+)/i],
+  [
+    [NAME, 'Windows'],
+    [VERSION, strMapper, windowsVersionMap],
+  ],
+  [
+    // iOS/macOS
+    /ip[honead]{2,4}\b(?:.*os ([\w]+) like mac|; opera)/i, // iOS
+    /(?:ios;fbsv\/|iphone.+ios[\/ ])([\d\.]+)/i,
+    /cfnetwork\/.+darwin/i,
+  ],
+  [
+    [VERSION, /_/g, '.'],
+    [NAME, 'iOS'],
+  ],
+  [
+    /(mac os x) ?([\w\. ]*)/i,
+    /(macintosh|mac_powerpc\b)(?!.+haiku)/i, // Mac OS
+  ],
+  [
+    [NAME, OS_MAPPER.Mac_OS],
+    [VERSION, /_/g, '.'],
+  ],
+  [
+    // Mobile OSes
+    /droid ([\w\.]+)\b.+(android[- ]x86|harmonyos)/i, // Android-x86/HarmonyOS
+  ],
+  [VERSION, NAME],
+  [
+    // Android/WebOS/QNX/Bada/RIM/Maemo/MeeGo/Sailfish OS
+    /(android|webos|qnx|bada|rim tablet os|maemo|meego|sailfish)[-\/ ]?([\w\.]*)/i,
+    /(blackberry)\w*\/([\w\.]*)/i, // Blackberry
+    /(tizen|kaios)[\/ ]([\w\.]+)/i, // Tizen/KaiOS
+    /\((series40);/i, // Series 40
+  ],
+  [NAME, VERSION],
+  [
+    /\(bb(10);/i, // BlackBerry 10
+  ],
+  [VERSION, [NAME, DEVICE_MAPPER.BlackBerry]],
+  [
+    /(?:symbian ?os|symbos|s60(?=;)|series60)[-\/ ]?([\w\.]*)/i, // Symbian
+  ],
+  [VERSION, [NAME, 'Symbian']],
+  [
+    /mozilla\/[\d\.]+ \((?:mobile|tablet|tv|mobile; [\w ]+); rv:.+ gecko\/([\w\.]+)/i, // Firefox OS
+  ],
+  [VERSION, [NAME, `${BRWOSER_MAPPER.Firefox} OS`]],
+  [
+    /web0s;.+rt(tv)/i,
+    /\b(?:hp)?wos(?:browser)?\/([\w\.]+)/i, // WebOS
+  ],
+  [VERSION, [NAME, 'webOS']],
+  [
+    /watch(?: ?os[,\/]|\d,\d\/)([\d\.]+)/i, // watchOS
+  ],
+  [VERSION, [NAME, 'watchOS']],
+  [
+    // Google Chromecast
+    /crkey\/([\d\.]+)/i, // Google Chromecast
+  ],
+  [VERSION, [NAME, `${BRWOSER_MAPPER.Chrome}cast`]],
+  [
+    /(cros) [\w]+(?:\)| ([\w\.]+)\b)/i, // Chromium OS
+  ],
+  [[NAME, OS_MAPPER.Chromium_OS], VERSION],
+  [
+    // Smart TVs
+    /panasonic;(viera)/i, // Panasonic Viera
+    /(netrange)mmh/i, // Netrange
+    /(nettv)\/(\d+\.[\w\.]+)/i, // NetTV
+
+    // Console
+    /(nintendo|playstation) ([wids345portablevuch]+)/i, // Nintendo/Playstation
+    /(xbox); +xbox ([^\);]+)/i, // Microsoft Xbox (360, One, X, S, Series X, Series S)
+
+    // Other
+    /\b(joli|palm)\b ?(?:os)?\/?([\w\.]*)/i, // Joli/Palm
+    /(mint)[\/\(\) ]?(\w*)/i, // Mint
+    /(mageia|vectorlinux)[; ]/i, // Mageia/VectorLinux
+    /([kxln]?ubuntu|debian|suse|opensuse|gentoo|arch(?= linux)|slackware|fedora|mandriva|centos|pclinuxos|red ?hat|zenwalk|linpus|raspbian|plan 9|minix|risc os|contiki|deepin|manjaro|elementary os|sabayon|linspire)(?: gnu\/linux)?(?: enterprise)?(?:[- ]linux)?(?:-gnu)?[-\/ ]?(?!chrom|package)([-\w\.]*)/i,
+    // Ubuntu/Debian/SUSE/Gentoo/Arch/Slackware/Fedora/Mandriva/CentOS/PCLinuxOS/RedHat/Zenwalk/Linpus/Raspbian/Plan9/Minix/RISCOS/Contiki/Deepin/Manjaro/elementary/Sabayon/Linspire
+    /(hurd|linux) ?([\w\.]*)/i, // Hurd/Linux
+    /(gnu) ?([\w\.]*)/i, // GNU
+    /\b([-frentopcghs]{0,5}bsd|dragonfly)[\/ ]?(?!amd|[ix346]{1,2}86)([\w\.]*)/i, // FreeBSD/NetBSD/OpenBSD/PC-BSD/GhostBSD/DragonFly
+    /(haiku) (\w+)/i, // Haiku
+  ],
+  [NAME, VERSION],
+  [
+    /(sunos) ?([\w\.\d]*)/i, // Solaris
+  ],
+  [[NAME, 'Solaris'], VERSION],
+  [
+    /((?:open)?solaris)[-\/ ]?([\w\.]*)/i, // Solaris
+    /(aix) ((\d)(?=\.|\)| )[\w\.])*/i, // AIX
+    /\b(beos|os\/2|amigaos|morphos|openvms|fuchsia|hp-ux|serenityos)/i, // BeOS/OS2/AmigaOS/MorphOS/OpenVMS/Fuchsia/HP-UX/SerenityOS
+    /(unix) ?([\w\.]*)/i, // UNIX
+  ],
+  [NAME, VERSION],
+]
