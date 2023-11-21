@@ -1,3 +1,17 @@
+## [0.0.5](https://github.com/hemengke1997/un-detector/compare/v0.0.4...v0.0.5) (2023-11-21)
+
+
+### Bug Fixes
+
+* ssr ([f140322](https://github.com/hemengke1997/un-detector/commit/f140322e1bb3f6679bc091834cd6acca28156a84))
+
+
+### Performance Improvements
+
+* better mobile check ([8417cfe](https://github.com/hemengke1997/un-detector/commit/8417cfebbe3b37ff44c7f28ef9da2949fa61def5))
+
+
+
 ## [0.0.4](https://github.com/hemengke1997/un-detector/compare/v0.0.3...v0.0.4) (2023-11-20)
 
 
