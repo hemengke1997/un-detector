@@ -2,22 +2,26 @@
 
 > browser, os, device detector
 
-[![npm version](https://img.shields.io/npm/v/un-detector.svg?style=flat-square)](https://www.npmjs.com/package/un-detector)
-[![npm downloads](https://img.shields.io/npm/dm/un-detector.svg?style=flat-square)](https://www.npmjs.com/package/un-detector)
-[![npm license](https://img.shields.io/npm/l/un-detector.svg?style=flat-square)](https://www.npmjs.com/package/un-detector)
+[![npm version](https://img.shields.io/npm/v/un-detector.svg)](https://www.npmjs.com/package/un-detector)
+[![npm downloads](https://img.shields.io/npm/dm/un-detector.svg)](https://www.npmjs.com/package/un-detector)
+[![npm license](https://img.shields.io/npm/l/un-detector.svg)](https://www.npmjs.com/package/un-detector)
 
 ## Install
 
-```bash
+```sh
 pnpm add un-detector
 ```
 
 ## Usage
 
 ```ts
-import { detect } from 'un-detector';
+import { detect } from 'un-detector'
 
-const detected = detect(window.navigator.userAgent);
+// client
+const detected = detect(window.navigator.userAgent)
+
+// server
+const detected = detect(request.headers['user-agent'])
 ```
 
 Then you will get device info like:
@@ -89,4 +93,7 @@ console.log(browser.isChrome())
 
 ## Thanks
 
-`ua-parser-js`
+- `ua-parser-js`
+- `detector-js`
+- `browser-detect`
+- `mobile-device-detect`

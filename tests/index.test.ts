@@ -9,6 +9,7 @@ describe('test method: detect()', () => {
   test('detect  Chrome on Windows 10', () => {
     const userAgent =
       '5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+
     const result = detect(userAgent)
     expect(result.is.mobile).to.false
     expect(result.browser.name).to.equal(BRWOSER_MAPPER.Chrome)
@@ -23,6 +24,7 @@ describe('test method: detect()', () => {
   test('detect  Edge on Windows 10', () => {
     const userAgent =
       '5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586'
+
     const result = detect(userAgent)
     expect(result.is.mobile).to.false
     expect(result.browser.name).to.equal(BRWOSER_MAPPER.Edge)
@@ -38,6 +40,7 @@ describe('test method: detect()', () => {
   test('detect  Edge on Windows 8.1', () => {
     const userAgent =
       'Mozilla/5.0 (Windows NT 6.3; Win64, x64; Touch) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36 Edge/12.0 (Touch; Trident/7.0; .NET4.0E; .NET4.0C; .NET CLR 3.5.30729; .NET CLR 2.0.50727; .NET CLR 3.0.30729; HPNTDFJS; H9P; InfoPath'
+
     const result = detect(userAgent)
     expect(result.is.mobile).to.false
     expect(result.browser.name).to.equal(BRWOSER_MAPPER.Edge)
@@ -53,6 +56,7 @@ describe('test method: detect()', () => {
   test('detect  Internet Explorer 11.0 on Windows 10', () => {
     const userAgent =
       '5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; InfoPath.3; Tablet PC 2.0; printmade=3.0.0.7; rv:11.0) like Gecko'
+
     const result = detect(userAgent)
     expect(result.is.mobile).to.false
     expect(result.browser.name).to.equal(BRWOSER_MAPPER.IE)
@@ -69,6 +73,7 @@ describe('test method: detect()', () => {
   test('detect  Internet Explorer 10.6.0 on Windows 7', () => {
     const userAgent =
       'Mozilla/5.0 (compatible; MSIE 10.6; Windows NT 6.1; Trident/5.0; InfoPath.2; SLCC1; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET CLR 2.0.50727) 3gpp-gba UNTRUSTED/1.0'
+
     const result = detect(userAgent)
     expect(result.is.mobile).to.false
     expect(result.browser.name).to.equal(BRWOSER_MAPPER.IE)
@@ -84,8 +89,8 @@ describe('test method: detect()', () => {
 
   test('detect  Firefox on Windows 10', () => {
     const userAgent = 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0'
-    const result = detect(userAgent)
 
+    const result = detect(userAgent)
     expect(result.is.mobile).to.false
     expect(result.browser.name).to.equal(BRWOSER_MAPPER.Firefox)
     expect(result.os.name).to.equal('Windows')
@@ -101,8 +106,8 @@ describe('test method: detect()', () => {
   test('detect  Opera on Windows 10', () => {
     const userAgent =
       '5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36 OPR/49.0.2725.47'
-    const result = detect(userAgent)
 
+    const result = detect(userAgent)
     expect(result.is.mobile).to.false
     expect(result.browser.name).to.equal(BRWOSER_MAPPER.Opera)
     expect(result.os.name).to.equal('Windows')
@@ -118,8 +123,8 @@ describe('test method: detect()', () => {
   test('detect  Whale on Windows 10', () => {
     const userAgent =
       '5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Whale/1.0.37.16 Safari/537.36'
-    const result = detect(userAgent)
 
+    const result = detect(userAgent)
     expect(result.is.mobile).to.false
     expect(result.browser.name).to.equal('Whale')
     expect(result.os.name).to.equal('Windows')
@@ -278,6 +283,7 @@ describe('test method: detect()', () => {
   test('detect  Firefox on iPad (Mobile)', () => {
     const userAgent =
       'Mozilla/5.0 (iPad; CPU OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/119.0 Mobile/15E148 Safari/605.1.15'
+
     const result = detect(userAgent)
     expect(result.is.mobile).to.true
     expect(result.browser.name).to.equal(BRWOSER_MAPPER.Firefox)
