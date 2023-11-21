@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "private": false,
   "packageManager": "pnpm@8.10.5",
-  "description": "A simple and zero-dependency browser and os detector.",
+  "description": "A simple and zero-dependency browser, os and device detector.",
   "type": "module",
   "keywords": [
     "browser detector",

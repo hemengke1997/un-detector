@@ -1,6 +1,6 @@
 import { BrwoserRegxMapper } from './browser'
 import { BRWOSER_MAPPER, DEVICE_TYPE_MAPPER, MODEL_MAPPER, OS_MAPPER } from './constants'
-import { DeviceRegexMapper } from './device'
+import { DeviceRegexMapper, MobileRegExp } from './device'
 import { OsRegexMapper } from './os'
 import { type Result, isIOS13Check, majorize, rgxMapper } from './util'
 
@@ -70,6 +70,8 @@ export class Detector {
     const { os } = this.detectOS()
     const { device } = this.detectDevice()
 
+    const { isMobile } = this.detectMobile()
+
     const getIPad13 = () => isIOS13Check('iPad')
     const getIphone13 = () => isIOS13Check('iPhone')
     const getIPod13 = () => isIOS13Check('iPod')
@@ -87,7 +89,11 @@ export class Detector {
       },
       is: {
         // device type
-        mobile: device.type === DEVICE_TYPE_MAPPER.mobile || device.type === DEVICE_TYPE_MAPPER.tablet || getIPad13(),
+        mobile:
+          isMobile ||
+          device.type === DEVICE_TYPE_MAPPER.mobile ||
+          device.type === DEVICE_TYPE_MAPPER.tablet ||
+          getIPad13(),
         mobileOnly: device.type === DEVICE_TYPE_MAPPER.mobile,
         tablet: device.type === DEVICE_TYPE_MAPPER.tablet || getIPad13(),
 
@@ -137,6 +143,11 @@ export class Detector {
     return {
       device: rgxMapper(this.userAgent, DeviceRegexMapper),
     }
+  }
+
+  private detectMobile() {
+    const mobile = MobileRegExp.test(this.userAgent)
+    return { isMobile: mobile }
   }
 
   private handleMissingError() {
