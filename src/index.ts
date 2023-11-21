@@ -1,12 +1,8 @@
 import { Detector } from './Detector'
-import { iife } from './util'
-
-const injectableNavigator = typeof window !== 'undefined' ? window.navigator : undefined
-
-const injectableProcess = typeof process !== 'undefined' ? process : undefined
+import { iife, injectableNavigator, injectableProcess } from './util'
 
 export function detect(userAgent?: string) {
-  return new Detector(userAgent, injectableNavigator, injectableProcess).detect()
+  return new Detector(userAgent, injectableNavigator(), injectableProcess()).detect()
 }
 
 export const os = iife(['mac', 'windows', 'iOS', 'android', 'winPhone', 'linux'] as const)

@@ -131,15 +131,26 @@ function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+export function injectableNavigator() {
+  return typeof window !== 'undefined' ? window.navigator : undefined
+}
+
+export function injectableProcess() {
+  return typeof process !== 'undefined' ? process : undefined
+}
+
 export const isIOS13Check = (type: string) => {
-  const nav = window.navigator
-  return (
-    (nav &&
-      nav.platform &&
-      (nav.platform.includes(type) ||
-        (nav.platform === 'MacIntel' && nav.maxTouchPoints > 1 && !(window as any).MSStream))) ||
-    false
-  )
+  if (injectableNavigator()) {
+    const nav = injectableNavigator()
+    return (
+      (nav &&
+        nav.platform &&
+        (nav.platform.includes(type) ||
+          (nav.platform === 'MacIntel' && nav.maxTouchPoints > 1 && !(window as any).MSStream))) ||
+      false
+    )
+  }
+  return false
 }
 
 export function iife<T extends readonly string[] = string[], U extends T[number] = T[number]>(types: T) {
