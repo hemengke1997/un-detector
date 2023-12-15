@@ -45,7 +45,6 @@
     "test:dev": "vitest",
     "test": "run-s test:unit",
     "test:unit": "vitest run",
-    "preinstall": "npx only-allow pnpm",
     "lint": "eslint .",
     "up": "taze -I -w -r",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
