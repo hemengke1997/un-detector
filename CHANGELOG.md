@@ -1,3 +1,12 @@
+## [0.0.6](https://github.com/hemengke1997/un-detector/compare/v0.0.5...v0.0.6) (2023-12-15)
+
+
+### Bug Fixes
+
+* remove pnpm restriction ([71cdb67](https://github.com/hemengke1997/un-detector/commit/71cdb67a7cbc55400854bc966a3217d1509154cd))
+
+
+
 ## [0.0.5](https://github.com/hemengke1997/un-detector/compare/v0.0.4...v0.0.5) (2023-11-21)
 
 
