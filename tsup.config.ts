@@ -1,40 +1,32 @@
+import fs from 'node:fs'
 import path from 'node:path'
-import resolve from 'resolve'
 import { type Options, defineConfig } from 'tsup'
-
-const nodeResolve = (id: string, opts: resolve.Opts) => {
-  return resolve.sync(id, {
-    extensions: ['.ts'],
-    ...opts,
-  })
-}
 
 const fileSuffixPlugin: NonNullable<Options['esbuildPlugins']>[0] = {
   name: 'add-file-suffix',
   setup(build) {
-    build.onResolve({ filter: /.*/ }, async (args) => {
+    build.onResolve({ filter: /.*/ }, (args) => {
       if (args.kind === 'entry-point') return
-      const importeePath = args.path
+      let importeePath = args.path
 
       // is external module
       if (importeePath[0] !== '.' && !path.isAbsolute(importeePath)) {
         return {}
       }
-
       if (!importeePath.endsWith('.js')) {
-        try {
-          const resolvedPath = nodeResolve(importeePath, {
-            basedir: args.resolveDir,
-          })
-          if (resolvedPath) {
-            // convert ts path to js path
-            return { path: resolvedPath.replace(/\.ts$/, '.js'), external: true }
-          }
-        } catch {
-          return {}
+        // is path dir?
+        const filePath = path.join(args.resolveDir, importeePath)
+
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+          // if path is dir, then append /index.js
+          importeePath += '/index.js'
+        } else {
+          // else append .js
+          importeePath += '.js'
         }
+        return { path: importeePath, external: true }
       }
-      return { path: importeePath }
+      return {}
     })
   },
 }
