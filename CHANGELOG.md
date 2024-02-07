@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/hemengke1997/un-detector/compare/v1.0.0...v1.0.1) (2024-02-07)
+
+
+### Bug Fixes
+
+* tests ([0100c4f](https://github.com/hemengke1997/un-detector/commit/0100c4fa2d9191e9b57a4ab482ed5b1b3f466705))
+
+
+
 # [1.0.0](https://github.com/hemengke1997/un-detector/compare/v0.0.6...v1.0.0) (2024-02-07)
 
 
