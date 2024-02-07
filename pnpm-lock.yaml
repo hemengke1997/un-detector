@@ -17,9 +17,6 @@ importers:
       '@minko-fe/eslint-config':
         specifier: ^2.1.2
         version: 2.1.2(eslint@8.56.0)(tailwindcss@3.4.1)
-      '@minko-fe/lodash-pro':
-        specifier: ^0.1.17
-        version: 0.1.17
       '@minko-fe/tsconfig':
         specifier: ^2.0.7
         version: 2.0.7(typescript@5.3.3)
@@ -32,11 +29,8 @@ importers:
       conventional-changelog-cli:
         specifier: ^4.1.0
         version: 4.1.0
-      cross-env:
-        specifier: ^7.0.3
-        version: 7.0.3
       eslint:
-        specifier: 8.56.0
+        specifier: ^8.56.0
         version: 8.56.0
       happy-dom:
         specifier: ^12.10.3
@@ -943,7 +937,7 @@ packages:
       ajv: 6.12.6
       debug: 4.3.4
       espree: 9.6.1
-      globals: 13.23.0
+      globals: 13.24.0
       ignore: 5.2.4
       import-fresh: 3.3.0
       js-yaml: 4.1.0
@@ -1114,15 +1108,6 @@ packages:
       - svelte
       - svelte-eslint-parser
       - vue-eslint-parser
-    dev: true
-
-  /@minko-fe/lodash-pro@0.1.17:
-    resolution: {integrity: sha512-OBAFhoQuuvuLWcHxH7YM/kmvbXMuf7iNSBzwi63cE62nm+76hzNrRmJmV9EoJxxoFP88pkS9aTsdjuhcTIZrHA==}
-    dependencies:
-      '@types/lodash-es': 4.17.11
-      deepmerge: 4.3.1
-      lodash: 4.17.21
-      lodash-es: 4.17.21
     dev: true
 
   /@minko-fe/prettier-config@2.0.7(prettier@3.2.5):
@@ -1388,16 +1373,6 @@ packages:
 
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
-    dev: true
-
-  /@types/lodash-es@4.17.11:
-    resolution: {integrity: sha512-eCw8FYAWHt2DDl77s+AMLLzPn310LKohruumpucZI4oOFJkIgnlaJcy23OKMJxx4r9PeTF13Gv6w+jqjWQaYUg==}
-    dependencies:
-      '@types/lodash': 4.14.201
-    dev: true
-
-  /@types/lodash@4.14.201:
-    resolution: {integrity: sha512-y9euML0cim1JrykNxADLfaG0FgD1g/yTHwUs/Jg9ZIU7WKj2/4IW9Lbb1WZbvck78W/lfGXFfe+u2EGfIJXdLQ==}
     dev: true
 
   /@types/mdast@3.0.10:
@@ -2392,14 +2367,6 @@ packages:
       typescript: 5.3.3
     dev: true
 
-  /cross-env@7.0.3:
-    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
-    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
-    hasBin: true
-    dependencies:
-      cross-spawn: 7.0.3
-    dev: true
-
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
@@ -3273,7 +3240,7 @@ packages:
       file-entry-cache: 6.0.1
       find-up: 5.0.0
       glob-parent: 6.0.2
-      globals: 13.23.0
+      globals: 13.24.0
       graphemer: 1.4.0
       ignore: 5.2.4
       imurmurhash: 0.1.4
@@ -3691,13 +3658,6 @@ packages:
   /globals@11.12.0:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
     engines: {node: '>=4'}
-    dev: true
-
-  /globals@13.23.0:
-    resolution: {integrity: sha512-XAmF0RjlrjY23MA51q3HltdlGxUpXPvg0GioKiD9X6HD28iMjo2dKC8Vqwm7lne4GNr78+RHTfliktR6ZH09wA==}
-    engines: {node: '>=8'}
-    dependencies:
-      type-fest: 0.20.2
     dev: true
 
   /globals@13.24.0:
@@ -4470,10 +4430,6 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       p-locate: 6.0.0
-    dev: true
-
-  /lodash-es@4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
     dev: true
 
   /lodash.camelcase@4.3.0:
