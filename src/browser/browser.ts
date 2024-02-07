@@ -1,6 +1,6 @@
-import { BROWSER, BRWOSER_MAPPER, DEVICE_MAPPER, NAME, VERSION } from './constants'
-import { type RegexMap } from './type'
-import { strMapper } from './util'
+import { BROWSER, BRWOSER_MAPPER, DEVICE_MAPPER, NAME, VERSION } from '../constants'
+import { type RegexMap } from '../type'
+import { strMapper } from '../util'
 
 export const IsPopularBrowser = ['isEdge', 'isChrome', 'isSafari', 'isFirefox', 'isOpera', 'isIE'] as const
 

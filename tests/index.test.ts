@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest'
 import { browser, detect, device, os } from '../src'
-import { Detector } from '../src/Detector'
 import { BRWOSER_MAPPER, DEVICE_MAPPER, MODEL_MAPPER, OS_MAPPER } from '../src/constants'
+import { Detector } from '../src/core/Detector'
 
 // https://www.useragents.me/
 

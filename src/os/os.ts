@@ -1,6 +1,6 @@
-import { BRWOSER_MAPPER, DEVICE_MAPPER, NAME, OS_MAPPER, VERSION } from './constants'
-import { type RegexMap } from './type'
-import { strMapper } from './util'
+import { BRWOSER_MAPPER, DEVICE_MAPPER, NAME, OS_MAPPER, VERSION } from '../constants'
+import { type RegexMap } from '../type'
+import { strMapper } from '../util'
 
 // export const IsPopularOs = ['isAndroid', 'isIOS', 'isLinux', 'isMac', 'isWindows'] as const
 

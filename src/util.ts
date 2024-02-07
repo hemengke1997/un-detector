@@ -1,5 +1,5 @@
-import { detect } from '.'
 import { UNKNOWN } from './constants'
+import { detect } from './core'
 import { type DetectFn, type EvenType, type OddType, type RemoveArrayType } from './type'
 
 type MapType = { [key: string]: string | string[] }
