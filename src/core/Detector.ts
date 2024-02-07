@@ -1,7 +1,7 @@
-import { BrwoserRegxMapper } from '../browser/browser'
+import { BrwoserRegxMapper } from '../browser'
 import { BRWOSER_MAPPER, DEVICE_TYPE_MAPPER, MODEL_MAPPER, OS_MAPPER } from '../constants'
-import { DeviceRegexMapper, MobileRegExp } from '../device/device'
-import { OsRegexMapper } from '../os/os'
+import { DeviceRegexMapper, MobileRegExp } from '../device'
+import { OsRegexMapper } from '../os'
 import { type Result, isIOS13Check, majorize, rgxMapper } from '../util'
 
 export type BrowserDetected = {

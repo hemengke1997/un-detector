@@ -2,10 +2,6 @@ import { BROWSER, BRWOSER_MAPPER, DEVICE_MAPPER, NAME, VERSION } from '../consta
 import { type RegexMap } from '../type'
 import { strMapper } from '../util'
 
-export const IsPopularBrowser = ['isEdge', 'isChrome', 'isSafari', 'isFirefox', 'isOpera', 'isIE'] as const
-
-export type PopularBrowserType = (typeof IsPopularBrowser)[number]
-
 // Safari < 3.0
 const oldSafariMap = {
   '1.0': '/8',

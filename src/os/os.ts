@@ -2,10 +2,6 @@ import { BRWOSER_MAPPER, DEVICE_MAPPER, NAME, OS_MAPPER, VERSION } from '../cons
 import { type RegexMap } from '../type'
 import { strMapper } from '../util'
 
-// export const IsPopularOs = ['isAndroid', 'isIOS', 'isLinux', 'isMac', 'isWindows'] as const
-
-// export type PopularOsType = (typeof IsPopularOs)[number]
-
 const windowsVersionMap: Record<string, string | string[]> = {
   'ME': '4.90',
   'NT 3.11': 'NT3.51',
