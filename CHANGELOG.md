@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/hemengke1997/un-detector/compare/v1.0.1...v1.1.0) (2024-02-08)
+
+
+### Performance Improvements
+
+* improve out dist structure ([efc9204](https://github.com/hemengke1997/un-detector/commit/efc92041aca6ad5cc69e1b3e6286b681e16aa242))
+
+
+
 ## [1.0.1](https://github.com/hemengke1997/un-detector/compare/v1.0.0...v1.0.1) (2024-02-07)
 
 
