@@ -24,14 +24,14 @@
     "README.md",
     "dist"
   ],
-  "main": "./dist/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/lib/index.cjs",
+  "module": "./dist/es/index.js",
+  "types": "./dist/es/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/esm/index.js"
+      "types": "./dist/es/index.d.ts",
+      "require": "./dist/lib/index.cjs",
+      "import": "./dist/es/index.js"
     }
   },
   "sideEffects": false,
@@ -40,7 +40,7 @@
   },
   "scripts": {
     "dev": "simple-git-hooks && tsup --watch",
-    "build": "tsup",
+    "build": "rm -rf dist && tsup",
     "build:pages": "pnpm run build && cd playground/spa && pnpm run build",
     "test": "vitest",
     "test:unit": "vitest --run",

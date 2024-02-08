@@ -23,9 +23,6 @@ importers:
       '@types/node':
         specifier: ^20.11.16
         version: 20.11.16
-      '@types/resolve':
-        specifier: ^1.20.6
-        version: 1.20.6
       bumpp:
         specifier: ^9.3.0
         version: 9.3.0
@@ -44,9 +41,6 @@ importers:
       npm-run-all2:
         specifier: ^6.1.2
         version: 6.1.2
-      resolve:
-        specifier: ^1.22.8
-        version: 1.22.8
       simple-git-hooks:
         specifier: ^2.9.0
         version: 2.9.0
@@ -1417,10 +1411,6 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.1.1
-    dev: true
-
-  /@types/resolve@1.20.6:
-    resolution: {integrity: sha512-A4STmOXPhMUtHH+S6ymgE2GiBSMqf4oTvcQZMcHzokuTLVYzXTB8ttjcgxOVaAp2lGwEdzZ0J+cRbbeevQj1UQ==}
     dev: true
 
   /@types/scheduler@0.16.2:
