@@ -1,3 +1,12 @@
+## [1.1.1](https://github.com/hemengke1997/un-detector/compare/v1.1.0...v1.1.1) (2024-07-26)
+
+
+### Bug Fixes
+
+* ios13 check ([c96d368](https://github.com/hemengke1997/un-detector/commit/c96d368fca4d891559b00ee8f5bfd9a8a6291fc9))
+
+
+
 # [1.1.0](https://github.com/hemengke1997/un-detector/compare/v1.0.1...v1.1.0) (2024-02-08)
 
 

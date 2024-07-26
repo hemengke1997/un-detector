@@ -419,6 +419,16 @@ describe('test method: detect()', () => {
     expect(device.isMobile(userAgent)).to.true
   })
 
+  test('detect ipad', () => {
+    const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)'
+    const result = detect(userAgent)
+    expect(result.is.mobile).to.false
+    expect(result.os.name).to.equal(OS_MAPPER.Mac_OS)
+    expect(result.os.version).to.equal('10.15.7')
+    expect(os.isMac(userAgent)).to.true
+    expect(device.isMobile(userAgent)).to.false
+  })
+
   test('detect  iOS WebView on iPad', () => {
     const userAgent =
       'Mozilla/5.0 (iPad; U; CPU OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Mobile'

@@ -98,9 +98,9 @@ export class Detector {
         tablet: device.type === DEVICE_TYPE_MAPPER.tablet || getIPad13(),
 
         // os
-        mac: os.name === OS_MAPPER.Mac_OS,
+        mac: os.name === OS_MAPPER.Mac_OS && !getIphone13() && !getIPad13() && !getIPod13(),
         windows: os.name === OS_MAPPER.Windows,
-        iOS: os.name === OS_MAPPER.iOS,
+        iOS: os.name === OS_MAPPER.iOS || getIphone13() || getIPad13() || getIPod13(),
         android: os.name === OS_MAPPER.Android,
         winPhone: os.name === OS_MAPPER.Windows_Phone,
         linux: os.name === OS_MAPPER.Linux,

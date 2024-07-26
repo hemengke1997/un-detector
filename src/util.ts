@@ -141,7 +141,7 @@ export const isIOS13Check = (type: string) => {
       (nav &&
         nav.platform &&
         (nav.platform.includes(type) ||
-          (nav.platform === 'MacIntel' && nav.maxTouchPoints > 1 && !(window as any).MSStream))) ||
+          (nav.platform === 'MacIntel' && nav.maxTouchPoints >= 1 && !(window as any).MSStream))) ||
       false
     )
   }
