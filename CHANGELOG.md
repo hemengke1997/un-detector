@@ -3,7 +3,7 @@
 
 ### Bug Fixes
 
-* ios13 check ([c96d368](https://github.com/hemengke1997/un-detector/commit/c96d368fca4d891559b00ee8f5bfd9a8a6291fc9))
+* ios13 check ([1c5272f](https://github.com/hemengke1997/un-detector/commit/1c5272f5488b38eee26ba82b16764295e560f33d))
 
 
 
