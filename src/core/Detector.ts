@@ -2,7 +2,7 @@ import { BrwoserRegxMapper } from '../browser'
 import { BRWOSER_MAPPER, DEVICE_TYPE_MAPPER, MODEL_MAPPER, OS_MAPPER } from '../constants'
 import { DeviceRegexMapper, MobileRegExp } from '../device'
 import { OsRegexMapper } from '../os'
-import { type Result, isIOS13Check, majorize, rgxMapper } from '../util'
+import { isIOS13Check, majorize, type Result, rgxMapper } from '../util'
 
 export type BrowserDetected = {
   browser: { majorVersion?: string } & Result
@@ -21,6 +21,7 @@ export type BrowserDetected = {
     android: boolean
     winPhone: boolean
     linux: boolean
+    harmonyOS: boolean
 
     // browser
     edge: boolean
@@ -104,6 +105,7 @@ export class Detector {
         android: os.name === OS_MAPPER.Android,
         winPhone: os.name === OS_MAPPER.Windows_Phone,
         linux: os.name === OS_MAPPER.Linux,
+        harmonyOS: os.name === OS_MAPPER.Harmony_OS,
 
         // browser
         edge: browser.name === BRWOSER_MAPPER.Edge,

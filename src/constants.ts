@@ -53,6 +53,7 @@ export const OS_MAPPER = {
   Windows_Phone: 'Windows Phone',
   Linux: 'Linux',
   Chromium_OS: 'Chromium OS',
+  Harmony_OS: 'HarmonyOS',
 }
 
 // brower

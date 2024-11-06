@@ -57,6 +57,10 @@ export const OsRegexMapper: RegexMap = [
   ],
   [VERSION, NAME],
   [
+    /(OpenHarmony)([\w\.]+)/i, // HarmonyOS
+  ],
+  [[NAME, OS_MAPPER.Harmony_OS], VERSION],
+  [
     // Android/WebOS/QNX/Bada/RIM/Maemo/MeeGo/Sailfish OS
     /(android|webos|qnx|bada|rim tablet os|maemo|meego|sailfish)[-\/ ]?([\w\.]*)/i,
     /(blackberry)\w*\/([\w\.]*)/i, // Blackberry
