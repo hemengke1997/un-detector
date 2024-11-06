@@ -19,7 +19,7 @@ jobs:
           persist-credentials: false
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@v3
 
       - name: Install Dependencies
         run: |
