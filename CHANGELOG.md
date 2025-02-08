@@ -1,3 +1,12 @@
+## [1.1.4](https://github.com/hemengke1997/un-detector/compare/v1.1.3...v1.1.4) (2025-02-08)
+
+
+### Bug Fixes
+
+* HarmonyOS ([13468c7](https://github.com/hemengke1997/un-detector/commit/13468c731620fd9fd3c3989daa81c8f3515c95ae))
+
+
+
 ## [1.1.3](https://github.com/hemengke1997/un-detector/compare/v1.1.2...v1.1.3) (2024-11-06)
 
 
