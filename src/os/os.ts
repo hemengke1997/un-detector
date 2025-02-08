@@ -57,7 +57,7 @@ export const OsRegexMapper: RegexMap = [
   ],
   [VERSION, NAME],
   [
-    /(OpenHarmony)([\w\.]+)/i, // HarmonyOS
+    /(OpenHarmony)\s*([\w\.]+)/i, // HarmonyOS
   ],
   [[NAME, OS_MAPPER.Harmony_OS], VERSION],
   [

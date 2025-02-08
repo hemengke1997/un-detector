@@ -537,7 +537,7 @@ describe('test method: detect()', () => {
 
   test('detect harmoney os', () => {
     const userAgent =
-      'Mozilla/5.0 (Phone; OpenHarmony5.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 ArkWeb/4.1.6.1 Mobile'
+      'Mozilla/5.0 (Phone; OpenHarmony 5.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 ArkWeb/4.1.6.1 Mobile'
     const result = detect(userAgent)
     expect(result.is.mobile).to.true
     expect(result.browser.name).to.equal('Chrome')
