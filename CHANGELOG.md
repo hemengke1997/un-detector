@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/hemengke1997/un-detector/compare/v1.1.4...v1.2.0) (2025-04-15)
+
+
+### Features
+
+* tree-shaking ([7058270](https://github.com/hemengke1997/un-detector/commit/7058270ec92199dfa22d34a1169879c93264866e))
+
+
+
 ## [1.1.4](https://github.com/hemengke1997/un-detector/compare/v1.1.3...v1.1.4) (2025-02-08)
 
 
