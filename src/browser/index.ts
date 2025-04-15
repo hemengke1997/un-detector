@@ -1,4 +1,8 @@
-import { detect } from '../core'
+import { BrowserDetector } from './detector'
+
+function detect(ua?: string) {
+  return new BrowserDetector(ua).detect()
+}
 
 export const browser = Object.freeze({
   isEdge: (ua?: string) => detect(ua).is.edge,
@@ -9,5 +13,3 @@ export const browser = Object.freeze({
   isIE: (ua?: string) => detect(ua).is.IE,
   isChromium: (ua?: string) => detect(ua).is.chromium,
 })
-
-export { BrwoserRegxMapper } from './browser'

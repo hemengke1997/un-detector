@@ -1,7 +1,8 @@
 import { describe, expect, test } from 'vitest'
 import { browser, detect, device, os } from '../src'
-import { BRWOSER_MAPPER, DEVICE_MAPPER, MODEL_MAPPER, OS_MAPPER } from '../src/constants'
-import { Detector } from '../src/core/Detector'
+import { BRWOSER_MAPPER } from '../src/browser/const'
+import { DEVICE_MAPPER, MODEL_MAPPER } from '../src/device/const'
+import { OS_MAPPER } from '../src/os/const'
 
 // https://www.useragents.me/
 
@@ -545,19 +546,5 @@ describe('test method: detect()', () => {
     expect(result.os.version).to.equal('5.0')
     expect(os.isHarmonyOS(userAgent)).to.true
     expect(device.isMobile(userAgent)).to.true
-  })
-})
-
-describe('test method: browser()', () => {
-  test('should thorw an error in node env', () => {
-    const detector = new Detector(undefined, undefined, globalThis.process)
-    expect(() => detector.detect()).to.throw(`Only support browser now`)
-  })
-
-  test('should throw an error with empty agent, navigator, process', () => {
-    const detector = new Detector(undefined, undefined, undefined)
-    expect(() => detector.detect()).to.throw(
-      `Please pass user-agent.\n> browser(navigator.userAgent or headers['user-agent']).`,
-    )
   })
 })

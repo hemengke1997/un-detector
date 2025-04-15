@@ -1,6 +1,8 @@
-import { BROWSER, BRWOSER_MAPPER, DEVICE_MAPPER, NAME, VERSION } from '../constants'
+import { BROWSER, NAME, VERSION } from '../const'
+import { DEVICE_MAPPER } from '../device/const'
 import { type RegexMap } from '../type'
 import { strMapper } from '../util'
+import { BRWOSER_MAPPER } from './const'
 
 // Safari < 3.0
 const oldSafariMap = {

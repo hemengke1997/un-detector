@@ -1,4 +1,8 @@
-import { detect } from '../core'
+import { OSDetector } from './detector'
+
+function detect(ua?: string) {
+  return new OSDetector(ua).detect()
+}
 
 export const os = Object.freeze({
   isMac: (ua?: string) => detect(ua).is.mac,
@@ -9,5 +13,3 @@ export const os = Object.freeze({
   isLinux: (ua?: string) => detect(ua).is.linux,
   isHarmonyOS: (ua?: string) => detect(ua).is.harmonyOS,
 })
-
-export { OsRegexMapper } from './os'

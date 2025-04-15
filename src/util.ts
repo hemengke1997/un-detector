@@ -1,4 +1,4 @@
-import { UNKNOWN } from './constants'
+import { UNKNOWN } from './const'
 import { type EvenType, type OddType, type RemoveArrayType } from './type'
 
 type MapType = { [key: string]: string | string[] }

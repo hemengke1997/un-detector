@@ -1,4 +1,8 @@
-import { detect } from '../core'
+import { DeviceDetector } from './detector'
+
+function detect(ua?: string) {
+  return new DeviceDetector(ua).detect()
+}
 
 export const device = Object.freeze({
   isIphone: (ua?: string) => detect(ua).is.iPhone,
@@ -8,5 +12,3 @@ export const device = Object.freeze({
   isMobileOnly: (ua?: string) => detect(ua).is.mobileOnly,
   isTablet: (ua?: string) => detect(ua).is.tablet,
 })
-
-export { DeviceRegexMapper, MobileRegExp } from './device'

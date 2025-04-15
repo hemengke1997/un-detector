@@ -1,6 +1,9 @@
-import { BRWOSER_MAPPER, DEVICE_MAPPER, NAME, OS_MAPPER, VERSION } from '../constants'
+import { BRWOSER_MAPPER } from '../browser/const'
+import { NAME, VERSION } from '../const'
+import { DEVICE_MAPPER } from '../device/const'
 import { type RegexMap } from '../type'
 import { strMapper } from '../util'
+import { OS_MAPPER } from './const'
 
 const windowsVersionMap: Record<string, string | string[]> = {
   'ME': '4.90',

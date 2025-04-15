@@ -1,6 +1,8 @@
-import { BRWOSER_MAPPER, DEVICE_MAPPER, DEVICE_TYPE_MAPPER, MODEL, TYPE, VENDOR } from '../constants'
+import { BRWOSER_MAPPER } from '../browser/const'
+import { MODEL, TYPE, VENDOR } from '../const'
 import { type RegexMap } from '../type'
 import { trim } from '../util'
+import { DEVICE_MAPPER, DEVICE_TYPE_MAPPER } from './const'
 
 // https://github.com/juliangruber/is-mobile/blob/main/index.js
 export const MobileRegExp =
